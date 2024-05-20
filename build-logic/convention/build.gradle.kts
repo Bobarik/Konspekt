@@ -1,20 +1,5 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     `kotlin-dsl`
-}
-
-group = "com.archipelago.jobbsyy"
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
-
-tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
-    }
 }
 
 dependencies {
@@ -34,19 +19,19 @@ tasks {
 gradlePlugin {
     plugins {
         register("application") {
-            id = "jobbsyy.application"
+            id = "korgy.application"
             implementationClass = "plugins.ApplicationConventionPlugin"
         }
         register("feature") {
-            id = "jobbsyy.feature"
+            id = "korgy.feature"
             implementationClass = "plugins.FeatureConventionPlugin"
         }
         register("library") {
-            id = "jobbsyy.library"
+            id = "korgy.library"
             implementationClass = "plugins.LibraryConventionPlugin"
         }
         register("composeLibrary") {
-            id = "jobbsyy.library.compose"
+            id = "korgy.library.compose"
             implementationClass = "plugins.ComposeLibraryConventionPlugin"
         }
     }

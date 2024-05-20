@@ -1,5 +1,5 @@
 plugins {
-    id("jobbsyy.library.compose")
+    id("korgy.library.compose")
 }
 
 kotlin {

@@ -1,13 +1,10 @@
 package plugins
 
-import Config.ApplicationId
-import com.android.build.gradle.LibraryExtension
-import com.archipelago.jobbsyy.configureAndroidLibrary
-import com.archipelago.jobbsyy.libs
+import com.bobarik.korgy.configureAndroidLibrary
+import com.bobarik.korgy.configureMultiplatformTargets
+import com.bobarik.korgy.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.configure
-import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 class LibraryConventionPlugin : Plugin<Project> {
 
@@ -17,18 +14,8 @@ class LibraryConventionPlugin : Plugin<Project> {
             apply(libs.plugins.android.library.get().pluginId)
         }
 
-        extensions.configure<KotlinMultiplatformExtension> {
-            jvmToolchain(17)
+        configureMultiplatformTargets()
 
-            jvm()
-            androidTarget()
-            applyDefaultHierarchyTemplate()
-        }
-
-        extensions.configure<LibraryExtension> {
-            val featureNamespace = "$ApplicationId.${path.split(':')[1]}"
-            namespace = featureNamespace
-            configureAndroidLibrary()
-        }
+        configureAndroidLibrary()
     }
 }

@@ -1,13 +1,10 @@
 package plugins
 
-import com.android.build.api.dsl.ApplicationExtension
-import com.archipelago.jobbsyy.configureAndroidApplication
-import com.archipelago.jobbsyy.configureMultiplatformApplication
-import com.archipelago.jobbsyy.libs
+import com.bobarik.korgy.configureAndroidApplication
+import com.bobarik.korgy.configureMultiplatformApplication
+import com.bobarik.korgy.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.configure
-import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 class ApplicationConventionPlugin : Plugin<Project> {
 
@@ -21,12 +18,8 @@ class ApplicationConventionPlugin : Plugin<Project> {
             apply(libs.plugins.kotlinx.serialization.get().pluginId)
         }
 
-        extensions.configure<KotlinMultiplatformExtension> {
-            configureMultiplatformApplication(libs)
-        }
+        configureMultiplatformApplication(libs)
 
-        extensions.configure<ApplicationExtension> {
-            configureAndroidApplication()
-        }
+        configureAndroidApplication()
     }
 }

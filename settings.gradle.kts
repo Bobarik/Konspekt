@@ -1,4 +1,4 @@
-rootProject.name = "Jobbsyy"
+rootProject.name = "korgy"
 include(":composeApp")
 
 pluginManagement {

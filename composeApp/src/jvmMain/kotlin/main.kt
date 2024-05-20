@@ -2,9 +2,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
-import com.archipelago.jobbsyy.App
-import com.archipelago.jobbsyy.di.AppModule
-import com.archipelago.jobbsyy.root.component.RootComponentImpl
+import com.bobarik.korgy.App
+import com.bobarik.korgy.di.AppModule
+import com.bobarik.korgy.root.component.RootComponentImpl
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import com.arkivanov.essenty.lifecycle.resume
@@ -33,7 +33,7 @@ fun main() {
 
     application {
         Window(
-            title = "Jobbsyy",
+            title = "korgy",
             state = rememberWindowState(width = 800.dp, height = 600.dp),
             onCloseRequest = ::exitApplication,
         ) {
