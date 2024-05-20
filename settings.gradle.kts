@@ -23,6 +23,7 @@ dependencyResolutionManagement {
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(":core:arch")
+include(":core:database")
 include(":core:navigation")
 include(":core:design-system")
 include(":feature:root")
