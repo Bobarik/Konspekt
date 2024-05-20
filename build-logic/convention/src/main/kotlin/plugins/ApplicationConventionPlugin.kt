@@ -1,8 +1,8 @@
 package plugins
 
-import com.bobarik.korgy.configureAndroidApplication
-import com.bobarik.korgy.configureMultiplatformApplication
-import com.bobarik.korgy.libs
+import com.bobarik.konspekt.configureAndroidApplication
+import com.bobarik.konspekt.configureMultiplatformApplication
+import com.bobarik.konspekt.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 

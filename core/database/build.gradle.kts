@@ -1,5 +1,5 @@
 plugins {
-    id("korgy.library")
+    id("konspekt.library")
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
 }
@@ -7,6 +7,7 @@ plugins {
 kotlin {
     sourceSets {
         commonMain.dependencies {
+            implementation(projects.core.domain)
             implementation(libs.sqlite.bundled)
             implementation(libs.room.runtime)
 

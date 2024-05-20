@@ -1,6 +1,6 @@
 object Config {
 
-    const val ApplicationId = "com.bobarik.korgy"
+    const val ApplicationId = "com.bobarik.konspekt"
     const val CompileSdk = 34
     const val MinSdk = 24
     const val TargetSdk = 34

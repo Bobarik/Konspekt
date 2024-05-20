@@ -19,19 +19,19 @@ tasks {
 gradlePlugin {
     plugins {
         register("application") {
-            id = "korgy.application"
+            id = "konspekt.application"
             implementationClass = "plugins.ApplicationConventionPlugin"
         }
         register("feature") {
-            id = "korgy.feature"
+            id = "konspekt.feature"
             implementationClass = "plugins.FeatureConventionPlugin"
         }
         register("library") {
-            id = "korgy.library"
+            id = "konspekt.library"
             implementationClass = "plugins.LibraryConventionPlugin"
         }
         register("composeLibrary") {
-            id = "korgy.library.compose"
+            id = "konspekt.library.compose"
             implementationClass = "plugins.ComposeLibraryConventionPlugin"
         }
     }

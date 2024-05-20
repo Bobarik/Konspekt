@@ -2,13 +2,13 @@
 
 #Core
 java = "17"
-kotlin = "2.0.0-RC3"
+kotlin = "2.0.0"
 
 #UI
-compose = "1.6.10-rc03"
+compose = "1.6.10"
 
 #Android Essentials
-agp = "8.4.0"
+agp = "8.4.1"
 androidx-appcompat = "1.6.1"
 androidx-activityCompose = "1.9.0"
 compose-uitooling = "1.6.7"
@@ -46,8 +46,8 @@ orbitCore = "7.1.0"
 ksp = "2.0.0-RC3-1.0.20"
 
 #Database
-room = "2.7.0-alpha01"
-sqlite = "2.5.0-SNAPSHOT"
+room = "2.7.0-alpha02"
+sqlite = "2.5.0-alpha02"
 
 [libraries]
 

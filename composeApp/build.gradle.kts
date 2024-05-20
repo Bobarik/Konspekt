@@ -1,7 +1,7 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
-    id("korgy.application")
+    id("konspekt.application")
 }
 
 kotlin {
@@ -32,7 +32,7 @@ compose.desktop {
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.bobarik.korgy.desktopApp"
+            packageName = "com.bobarik.konspekt.desktopApp"
             packageVersion = "1.0.0"
         }
     }

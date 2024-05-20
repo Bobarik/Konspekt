@@ -1,5 +1,5 @@
 plugins {
-    id("korgy.library.compose")
+    id("konspekt.library.compose")
 }
 
 kotlin {

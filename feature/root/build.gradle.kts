@@ -1,5 +1,5 @@
 plugins {
-    id("korgy.feature")
+    id("konspekt.feature")
 }
 
 kotlin {
