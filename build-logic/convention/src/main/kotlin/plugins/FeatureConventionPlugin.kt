@@ -1,5 +1,6 @@
 package plugins
 
+import com.bobarik.konspekt.apply
 import com.bobarik.konspekt.configureAndroidLibrary
 import com.bobarik.konspekt.configureMultiplatformFeature
 import com.bobarik.konspekt.libs
@@ -10,15 +11,15 @@ class FeatureConventionPlugin : Plugin<Project> {
 
     override fun apply(target: Project) = with(target) {
         with(pluginManager) {
-            apply(libs.plugins.multiplatform.get().pluginId)
-            apply(libs.plugins.android.library.get().pluginId)
-            apply(libs.plugins.compose.library.get().pluginId)
-            apply(libs.plugins.compose.compiler.get().pluginId)
-            apply(libs.plugins.kotlinx.serialization.get().pluginId)
+            apply(libs.plugins.multiplatform)
+            apply(libs.plugins.android.library)
+            apply(libs.plugins.compose.library)
+            apply(libs.plugins.compose.compiler)
+            apply(libs.plugins.kotlinx.serialization)
         }
 
         configureMultiplatformFeature(libs)
 
-        configureAndroidLibrary()
+        configureAndroidLibrary(libs = libs)
     }
 }

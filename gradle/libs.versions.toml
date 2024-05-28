@@ -1,5 +1,15 @@
 [versions]
 
+#Project
+appId = "com.bobarik.konspekt"
+
+versionCode = "1"
+versionName = "0.0.1"
+
+minSdk = "24"
+compileSdk = "34"
+targetSdk = "34"
+
 #Core
 java = "17"
 kotlin = "2.0.0"
@@ -22,28 +32,28 @@ essenty = "2.0.0"
 #Logging
 napier = "2.7.1"
 
-buildConfig = "4.1.2"
+buildConfig = "5.3.5"
 
 #Async
 kotlinx-coroutines = "1.8.1"
 
 #Networking
-ktor = "2.3.10"
+ktor = "2.3.11"
 
 #Serialization
 kotlinx-serialization = "1.6.3"
 
 #Date-time
-kotlinx-datetime = "0.5.0"
+kotlinx-datetime = "0.6.0"
 
 #DI
 koin = "3.5.6"
 
 #MVI
-orbitCore = "7.1.0"
+orbitCore = "8.0.0"
 
 #KSP
-ksp = "2.0.0-RC3-1.0.20"
+ksp = "2.0.0-1.0.21"
 
 #Database
 room = "2.7.0-alpha02"

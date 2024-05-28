@@ -1,28 +1,22 @@
 package com.bobarik.konspekt
 
-import Config
-import Config.ApplicationId
-import Config.MinSdk
-import Config.TargetSdk
-import Config.VersionCode
-import Config.VersionName
 import com.android.build.api.dsl.ApplicationExtension
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.get
 
 fun Project.configureAndroidApplication() = extensions.configure<ApplicationExtension> {
-    namespace = ApplicationId
-    compileSdk = Config.CompileSdk
+    namespace = libs.applicationId
+    compileSdk = libs.compileSdk
 
     defaultConfig {
-        minSdk = MinSdk
-        targetSdk = TargetSdk
+        minSdk = libs.minSdk
+        targetSdk = libs.targetSdk
 
-        applicationId = ApplicationId
+        applicationId = libs.applicationId
 
-        versionCode = VersionCode
-        versionName = VersionName
+        versionCode = libs.versionCode
+        versionName = libs.versionName
     }
 
     sourceSets["main"].apply {

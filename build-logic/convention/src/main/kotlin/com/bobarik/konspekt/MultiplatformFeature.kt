@@ -8,11 +8,8 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 fun Project.configureMultiplatformFeature(
     libs: LibrariesForLibs
 ) = extensions.configure<KotlinMultiplatformExtension> {
-    androidTarget()
-    jvm()
-    applyDefaultHierarchyTemplate()
 
-    jvmToolchain(libs.versions.java.get().toInt())
+    applyPlatformTargets(libs)
 
     sourceSets.apply {
         commonMain.dependencies {
