@@ -4,7 +4,6 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Fts4
 import androidx.room.PrimaryKey
-import com.bobarik.konspekt.domain.models.Note
 
 @Entity(tableName = "notes_fts")
 @Fts4(contentEntity = NoteEntity::class)

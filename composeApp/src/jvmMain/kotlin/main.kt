@@ -2,12 +2,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
-import com.bobarik.konspekt.App
-import com.bobarik.konspekt.di.AppModule
-import com.bobarik.konspekt.root.component.RootComponentImpl
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import com.arkivanov.essenty.lifecycle.resume
+import com.bobarik.konspekt.App
+import com.bobarik.konspekt.di.AppModule
+import com.bobarik.konspekt.root.component.RootComponentImpl
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import org.koin.core.context.startKoin

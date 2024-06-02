@@ -1,8 +1,8 @@
 package com.bobarik.konspekt.login.component
 
+import com.arkivanov.decompose.ComponentContext
 import com.bobarik.konspekt.arch.ContainerComponent
 import com.bobarik.konspekt.arch.blockingReduce
-import com.arkivanov.decompose.ComponentContext
 
 class LoginComponentImpl(
     componentContext: ComponentContext,
