@@ -56,8 +56,11 @@ orbitCore = "8.0.0"
 ksp = "2.0.0-1.0.21"
 
 #Database
-room = "2.7.0-alpha02"
-sqlite = "2.5.0-alpha02"
+room = "2.7.0-alpha03"
+sqlite = "2.5.0-alpha03"
+
+#Functional hooks
+arrow = "1.2.4"
 
 [libraries]
 
@@ -110,6 +113,12 @@ room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-runtime-android = { module = "androidx.room:room-runtime-android", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
+
+#Arrow
+arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrow" }
+arrow-coroutines = { module = "io.arrow-kt:arrow-fx-coroutines", version.ref = "arrow" }
+arrow-optics = { module = "io.arrow-kt:arrow-optics", version.ref = "arrow" }
+arrow-optics-ksp = { module = "io.arrow-kt:arrow-optics-ksp-plugin", version.ref = "arrow" }
 
 #Build logic
 android-gradle-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }

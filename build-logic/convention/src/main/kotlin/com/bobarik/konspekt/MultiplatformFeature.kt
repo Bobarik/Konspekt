@@ -12,22 +12,30 @@ fun Project.configureMultiplatformFeature(
     applyPlatformTargets(libs)
 
     sourceSets.apply {
-        commonMain.dependencies {
-            implementation(project(":core:arch"))
-            implementation(project(":core:domain"))
-            implementation(project(":core:navigation"))
+        commonMain {
+            kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
 
-            implementation(libs.napier)
-            implementation(libs.kotlinx.coroutines.core)
+            dependencies {
+                implementation(project(":core:arch"))
+                implementation(project(":core:domain"))
+                implementation(project(":core:navigation"))
 
-            implementation(project.dependencies.platform(libs.koin.bom))
-            implementation(libs.koin.core)
-            implementation(libs.koin.compose)
+                implementation(libs.napier)
+                implementation(libs.kotlinx.coroutines.core)
 
-            implementation(libs.decompose)
-            implementation(libs.decompose.compose)
+                implementation(project.dependencies.platform(libs.koin.bom))
+                implementation(libs.koin.core)
+                implementation(libs.koin.compose)
 
-            implementation(libs.orbit.core)
+                implementation(libs.decompose)
+                implementation(libs.decompose.compose)
+
+                implementation(libs.orbit.core)
+
+                implementation(libs.arrow.core)
+                implementation(libs.arrow.coroutines)
+                implementation(libs.arrow.optics)
+            }
         }
 
         commonTest.dependencies {

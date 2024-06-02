@@ -1,4 +1,4 @@
-package com.bobarik.konspekt
+package com.bobarik.konspekt.utils
 
 import org.gradle.accessors.dm.LibrariesForLibs
 

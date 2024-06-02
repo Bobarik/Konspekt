@@ -1,6 +1,13 @@
 package com.bobarik.konspekt
 
 import com.android.build.api.dsl.ApplicationExtension
+import com.bobarik.konspekt.utils.applicationId
+import com.bobarik.konspekt.utils.compileSdk
+import com.bobarik.konspekt.utils.libs
+import com.bobarik.konspekt.utils.minSdk
+import com.bobarik.konspekt.utils.targetSdk
+import com.bobarik.konspekt.utils.versionCode
+import com.bobarik.konspekt.utils.versionName
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.get

@@ -15,3 +15,5 @@ xcuserdata/
 Pods/
 *.jks
 *yarn.lock
+
+/core/database/schemas

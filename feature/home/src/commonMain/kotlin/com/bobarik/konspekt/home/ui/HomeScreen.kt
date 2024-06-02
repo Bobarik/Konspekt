@@ -9,9 +9,9 @@ import com.bobarik.konspekt.home.component.HomeComponent
 fun HomeScreen(
     homeComponent: HomeComponent
 ) {
-    val state by homeComponent.collectState()//TODO
+    val state by homeComponent.collectState()
 
-    HomeScreenContent()
+    HomeScreenContent(state, homeComponent::onEvent)
 }
 
 

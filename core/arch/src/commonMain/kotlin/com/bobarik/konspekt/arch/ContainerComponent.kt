@@ -12,7 +12,7 @@ abstract class ContainerComponent<STATE : BaseState, SIDE_EFFECT : BaseSideEffec
     coroutineContext: CoroutineContext = Dispatchers.Main.immediate
 ) : StateComponent<STATE, SIDE_EFFECT, EVENT>, ComponentContext by componentContext {
 
-    private val coroutineScope = coroutineScope(coroutineContext)
+    protected val coroutineScope = coroutineScope(coroutineContext)
 
     override val container = coroutineScope.container<STATE, SIDE_EFFECT>(initialState = initState)
 

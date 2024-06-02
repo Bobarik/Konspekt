@@ -2,6 +2,9 @@ package com.bobarik.konspekt
 
 import org.gradle.api.Project
 import com.android.build.gradle.LibraryExtension
+import com.bobarik.konspekt.utils.applicationId
+import com.bobarik.konspekt.utils.compileSdk
+import com.bobarik.konspekt.utils.libs
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension

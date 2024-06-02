@@ -1,9 +1,9 @@
 package plugins
 
-import com.bobarik.konspekt.apply
+import com.bobarik.konspekt.utils.apply
 import com.bobarik.konspekt.configureAndroidLibrary
 import com.bobarik.konspekt.configureMultiplatformTargets
-import com.bobarik.konspekt.libs
+import com.bobarik.konspekt.utils.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 

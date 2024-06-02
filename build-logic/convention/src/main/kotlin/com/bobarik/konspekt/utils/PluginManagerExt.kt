@@ -1,4 +1,4 @@
-package com.bobarik.konspekt
+package com.bobarik.konspekt.utils
 
 import org.gradle.api.plugins.PluginManager
 import org.gradle.api.provider.Provider

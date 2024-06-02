@@ -10,7 +10,7 @@ import com.bobarik.konspekt.database.entities.NoteFTSEntity
     entities = [NoteEntity::class, NoteFTSEntity::class],
     version = 1
 )
-abstract class KorgyDatabase : RoomDatabase() {
+abstract class KonspektDatabase : RoomDatabase() {
 
     abstract fun noteDao(): NoteDao
 }

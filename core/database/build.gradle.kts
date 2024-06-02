@@ -25,5 +25,6 @@ room {
 }
 
 dependencies {
-    ksp(libs.room.compiler)
+    kspAndroid(libs.room.compiler)
+    kspJvm(libs.room.compiler)
 }
