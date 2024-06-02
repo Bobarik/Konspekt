@@ -4,7 +4,7 @@
 appId = "com.bobarik.konspekt"
 
 versionCode = "1"
-versionName = "0.0.1"
+versionName = "1.0.0"
 
 minSdk = "24"
 compileSdk = "34"
@@ -19,7 +19,7 @@ compose = "1.6.10"
 
 #Android Essentials
 agp = "8.4.1"
-androidx-appcompat = "1.6.1"
+androidx-appcompat = "1.7.0"
 androidx-activityCompose = "1.9.0"
 compose-uitooling = "1.6.7"
 
@@ -27,7 +27,7 @@ compose-uitooling = "1.6.7"
 decompose = "3.0.0"
 
 #Lifecycle binds for multiplatform
-essenty = "2.0.0"
+essenty = "2.1.0"
 
 #Logging
 napier = "2.7.1"

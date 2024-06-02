@@ -10,11 +10,11 @@ import androidx.compose.ui.text.font.FontWeight.Companion.W500
 import androidx.compose.ui.text.font.FontWeight.Companion.W600
 import androidx.compose.ui.text.font.FontWeight.Companion.W700
 import androidx.compose.ui.unit.sp
-import konspekt.core.design_system.generated.resources.Res
-import konspekt.core.design_system.generated.resources.josefin_sans_400
-import konspekt.core.design_system.generated.resources.josefin_sans_500
-import konspekt.core.design_system.generated.resources.josefin_sans_600
-import konspekt.core.design_system.generated.resources.josefin_sans_700
+import konspekt.core.designsystem.generated.resources.Res
+import konspekt.core.designsystem.generated.resources.josefin_sans_400
+import konspekt.core.designsystem.generated.resources.josefin_sans_500
+import konspekt.core.designsystem.generated.resources.josefin_sans_600
+import konspekt.core.designsystem.generated.resources.josefin_sans_700
 import org.jetbrains.compose.resources.Font
 
 val JosefinSans

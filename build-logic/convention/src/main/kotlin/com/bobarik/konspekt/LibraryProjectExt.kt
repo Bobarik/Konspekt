@@ -12,8 +12,8 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 fun Project.configureAndroidLibrary(libs: LibrariesForLibs) = extensions.configure<LibraryExtension> {
     compileSdk = libs.compileSdk
 
-    val featureNamespace = "${libs.applicationId}.${path.split(':')[1]}"
-    namespace = featureNamespace
+    val moduleNamespace = "${libs.applicationId}.${path.split(':')[2]}"
+    namespace = moduleNamespace
 }
 
 fun Project.configureMultiplatformTargets() = extensions.configure<KotlinMultiplatformExtension> {

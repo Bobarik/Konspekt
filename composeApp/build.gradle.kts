@@ -1,3 +1,5 @@
+import com.bobarik.konspekt.utils.applicationId
+import com.bobarik.konspekt.utils.versionName
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
@@ -9,7 +11,7 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.core.arch)
             implementation(projects.core.database)
-            implementation(projects.core.designSystem)
+            implementation(projects.core.designsystem)
             implementation(projects.feature.root)
             implementation(projects.feature.login)
             implementation(projects.feature.home)
@@ -30,10 +32,15 @@ compose.desktop {
     application {
         mainClass = "MainKt"
 
+        buildTypes.release.proguard {
+            configurationFiles.from(project.file("proguard-rules.pro"))
+            obfuscate = true
+        }
+
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.bobarik.konspekt.desktopApp"
-            packageVersion = "1.0.0"
+            packageName = libs.applicationId
+            packageVersion = libs.versionName
         }
     }
 }

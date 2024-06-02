@@ -23,6 +23,8 @@
 #-keepclassmembers class io.ktor.** { volatile <fields>; }
 #-dontwarn javax.servlet.ServletContainerInitializer
 -dontwarn org.slf4j.impl.StaticLoggerBinder
+-dontwarn org.slf4j.impl.StaticMarkerBinder
+-dontwarn org.slf4j.impl.StaticMDCBinder
 -dontwarn java.awt.event.ActionListener
 -dontwarn javax.swing.SwingUtilities
 -dontwarn javax.swing.Timer
