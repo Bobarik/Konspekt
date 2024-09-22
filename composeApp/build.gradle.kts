@@ -11,7 +11,7 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.core.arch)
             implementation(projects.core.database)
-            implementation(projects.core.designsystem)
+            implementation(projects.core.designSystem)
             implementation(projects.feature.root)
             implementation(projects.feature.login)
             implementation(projects.feature.home)
