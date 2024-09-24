@@ -14,9 +14,7 @@ class AndroidApp : Application() {
         Napier.base(DebugAntilog())
         startKoin {
             androidContext(this@AndroidApp)
-            modules(
-                AppModule
-            )
+            modules(AppModule)
         }
     }
 }

@@ -13,8 +13,8 @@ kotlin {
             implementation(projects.core.database)
             implementation(projects.core.designSystem)
             implementation(projects.feature.root)
-            implementation(projects.feature.login)
-            implementation(projects.feature.home)
+            implementation(projects.feature.login.impl)
+            implementation(projects.feature.home.impl)
 
             implementation(compose.runtime)
             implementation(compose.ui)

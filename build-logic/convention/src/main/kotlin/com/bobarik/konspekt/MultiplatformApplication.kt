@@ -21,9 +21,12 @@ fun Project.configureMultiplatformApplication(
 
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.core)
+            implementation(libs.koin.compose)
 
-            implementation(libs.decompose)
-            implementation(libs.essenty.lifecycle)
+            implementation(libs.navigation.compose)
+
+            implementation(libs.androidx.lifecycle.viewmodel)
+            implementation(libs.androidx.lifecycle.viewmodel.compose)
         }
 
         commonTest.dependencies {

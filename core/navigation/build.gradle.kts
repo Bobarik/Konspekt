@@ -1,18 +1,18 @@
 plugins {
     alias(libs.plugins.multiplatform)
-    alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.compose.library)
+    alias(libs.plugins.compose.compiler)
 }
 
 kotlin {
     jvm()
 
     sourceSets {
-        commonMain.dependencies {
-            implementation(libs.decompose)
-            implementation(libs.decompose.compose)
-
-            implementation(project.dependencies.platform(libs.koin.bom))
-            implementation(libs.koin.core)
+        commonMain {
+            dependencies {
+                implementation(compose.runtime)
+                implementation(libs.navigation.compose)
+            }
         }
     }
 }

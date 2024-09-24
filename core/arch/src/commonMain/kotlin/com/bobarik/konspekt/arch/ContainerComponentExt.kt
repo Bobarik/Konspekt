@@ -7,17 +7,18 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
-import com.arkivanov.essenty.lifecycle.Lifecycle
-import com.arkivanov.essenty.lifecycle.coroutines.repeatOnLifecycle
-import com.arkivanov.essenty.lifecycle.coroutines.withLifecycle
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.repeatOnLifecycle
 
 @Composable
-fun <SIDE_EFFECT : BaseSideEffect> StateComponent<*, SIDE_EFFECT, *>.collectSideEffect(
+fun <SIDE_EFFECT : BaseSideEffect> MviViewModel<*, SIDE_EFFECT, *>.collectSideEffect(
     lifecycleState: Lifecycle.State = Lifecycle.State.STARTED,
     sideEffect: (suspend (sideEffect: SIDE_EFFECT) -> Unit)
 ) {
     val sideEffectFlow = container.sideEffectFlow
-    val lifecycleOwner = this
+    val lifecycleOwner = LocalLifecycleOwner.current
 
     val callback by rememberUpdatedState(newValue = sideEffect)
 
@@ -29,14 +30,14 @@ fun <SIDE_EFFECT : BaseSideEffect> StateComponent<*, SIDE_EFFECT, *>.collectSide
 }
 
 @Composable
-fun <STATE : BaseState> StateComponent<STATE, *, *>.collectState(
+fun <STATE : BaseState> MviViewModel<STATE, *, *>.collectState(
     lifecycleState: Lifecycle.State = Lifecycle.State.STARTED
 ): State<STATE> {
     val stateFlow = container.stateFlow
-    val lifecycleOwner = this
+    val lifecycleOwner = LocalLifecycleOwner.current
 
     val stateFlowLifecycleAware = remember(stateFlow, lifecycleOwner) {
-        stateFlow.withLifecycle(lifecycleOwner.lifecycle, lifecycleState)
+        stateFlow.flowWithLifecycle(lifecycleOwner.lifecycle, lifecycleState)
     }
 
     val initialValue = stateFlow.value

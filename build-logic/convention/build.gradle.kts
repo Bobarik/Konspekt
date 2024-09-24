@@ -6,6 +6,7 @@ dependencies {
     compileOnly(libs.android.gradle.plugin)
     compileOnly(libs.kotlin.gradle.plugin)
     compileOnly(libs.ksp.gradle.plugin)
+    compileOnly(libs.compose.gradle.plugin)
     compileOnly(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }
 
@@ -25,6 +26,10 @@ gradlePlugin {
         register("feature") {
             id = "konspekt.feature"
             implementationClass = "plugins.FeatureConventionPlugin"
+        }
+        register("featureApi") {
+            id = "konspekt.feature.api"
+            implementationClass = "plugins.FeatureApiConventionPlugin"
         }
         register("library") {
             id = "konspekt.library"

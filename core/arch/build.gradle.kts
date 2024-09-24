@@ -12,12 +12,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(compose.runtime)
-
-            implementation(libs.essenty.lifecycle)
-            implementation(libs.essenty.lifecycle.coroutines)
-
-            implementation(libs.decompose)
-            implementation(libs.decompose.compose)
+            implementation(compose.ui)
 
             api(libs.orbit.core)
             implementation(libs.napier)
@@ -25,6 +20,10 @@ kotlin {
 
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.core)
+
+            implementation(libs.androidx.lifecycle.viewmodel)
+            implementation(libs.androidx.lifecycle.viewmodel.compose)
+            implementation(libs.androidx.lifecycle.runtime.compose)
         }
 
         jvmMain.dependencies {
