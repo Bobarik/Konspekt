@@ -2,20 +2,16 @@ package com.bobarik.konspekt.arch
 
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.annotation.OrbitDsl
-import org.orbitmvi.orbit.syntax.simple.SimpleContext
-import org.orbitmvi.orbit.syntax.simple.blockingIntent
-import org.orbitmvi.orbit.syntax.simple.intent
-import org.orbitmvi.orbit.syntax.simple.postSideEffect
-import org.orbitmvi.orbit.syntax.simple.reduce
+import org.orbitmvi.orbit.syntax.IntentContext
 
 @OrbitDsl
 fun <STATE : BaseState> ContainerHost<STATE, *>.reduce(
-    transform: SimpleContext<STATE>.() -> STATE
+    transform: IntentContext<STATE>.() -> STATE
 ) = intent { reduce(transform) }
 
 @OrbitDsl
 fun <STATE : BaseState> ContainerHost<STATE, *>.blockingReduce(
-    transform: SimpleContext<STATE>.() -> STATE
+    transform: IntentContext<STATE>.() -> STATE
 ) = blockingIntent { reduce(transform) }
 
 @OrbitDsl

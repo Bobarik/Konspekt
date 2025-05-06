@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.orbitmvi.orbit.syntax.simple.intent
 import java.util.UUID
 
 @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
@@ -47,11 +46,11 @@ class HomeComponentImpl(
             }
             .onEach { list ->
                 reduce {
-                    state.copy {
-                        HomeState.generalState set HomeState.ScreenGeneralState.Content(
+                    state.copy(
+                        generalState = HomeState.ScreenGeneralState.Content(
                             notes = list.map(Note::toUi)
                         )
-                    }
+                    )
                 }
             }.launchIn(coroutineScope)
     }

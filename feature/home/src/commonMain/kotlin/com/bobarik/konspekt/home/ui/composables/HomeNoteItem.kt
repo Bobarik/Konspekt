@@ -1,6 +1,5 @@
 package com.bobarik.konspekt.home.ui.composables
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,14 +14,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.bobarik.konspekt.home.model.NoteUi
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun LazyGridItemScope.HomeNoteItem(
     modifier: Modifier = Modifier,
     note: NoteUi
 ) = Column(
     modifier = modifier.fillMaxWidth()
-        .animateItemPlacement()
+        .animateItem(fadeInSpec = null, fadeOutSpec = null)
         .clip(MaterialTheme.shapes.large)
         .background(MaterialTheme.colorScheme.primary)
         .padding(12.dp),
