@@ -20,7 +20,7 @@ class ApplicationConventionPlugin : Plugin<Project> {
       apply(libs.plugins.detekt)
     }
 
-    configureMultiplatformApplication(libs)
+    configureMultiplatformApplication()
 
     configureAndroidApplication()
   }

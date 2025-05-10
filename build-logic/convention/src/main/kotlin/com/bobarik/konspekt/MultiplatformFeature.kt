@@ -1,13 +1,11 @@
 package com.bobarik.konspekt
 
-import org.gradle.accessors.dm.LibrariesForLibs
+import com.bobarik.konspekt.utils.libs
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
-fun Project.configureMultiplatformFeature(
-  libs: LibrariesForLibs,
-) = extensions.configure<KotlinMultiplatformExtension> {
+fun Project.configureMultiplatformFeature() = extensions.configure<KotlinMultiplatformExtension> {
 
   applyPlatformTargets(libs)
 

@@ -2,13 +2,9 @@ plugins {
   id("konspekt.feature")
 }
 
-kotlin {
-  sourceSets {
-    commonMain.dependencies {
-      implementation(compose.runtime)
-      implementation(compose.material3)
-      implementation(compose.materialIconsExtended)
-      implementation(compose.components.resources)
-    }
-  }
+dependencies {
+  commonMainImplementation(compose.runtime)
+  commonMainImplementation(compose.material3)
+  commonMainImplementation(compose.materialIconsExtended)
+  commonMainImplementation(compose.components.resources)
 }

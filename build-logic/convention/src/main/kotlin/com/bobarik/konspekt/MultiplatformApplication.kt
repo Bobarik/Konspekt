@@ -1,15 +1,27 @@
 package com.bobarik.konspekt
 
-import org.gradle.accessors.dm.LibrariesForLibs
+import com.android.build.api.dsl.ApplicationExtension
+import com.bobarik.konspekt.utils.applicationId
+import com.bobarik.konspekt.utils.compileSdk
+import com.bobarik.konspekt.utils.libs
+import com.bobarik.konspekt.utils.minSdk
+import com.bobarik.konspekt.utils.targetSdk
+import com.bobarik.konspekt.utils.versionCode
+import com.bobarik.konspekt.utils.versionName
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.get
+import org.gradle.kotlin.dsl.getByType
+import org.jetbrains.compose.ComposeExtension
+import org.jetbrains.compose.desktop.DesktopExtension
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
-fun Project.configureMultiplatformApplication(
-  libs: LibrariesForLibs,
-) = extensions.configure<KotlinMultiplatformExtension> {
-
+fun Project.configureMultiplatformApplication() = extensions.configure<KotlinMultiplatformExtension> {
   applyPlatformTargets(libs)
+  val composeExtension = project.extensions.getByType<ComposeExtension>()
+  val desktopExtension = composeExtension.extensions.getByType<DesktopExtension>()
+  val compose = composeExtension.dependencies
 
   sourceSets.apply {
     commonMain.dependencies {
@@ -24,10 +36,19 @@ fun Project.configureMultiplatformApplication(
 
       implementation(libs.decompose)
       implementation(libs.essenty.lifecycle)
+
+      implementation(compose.runtime)
+      implementation(compose.ui)
+      implementation(compose.components.resources)
     }
 
     commonTest.dependencies {
       implementation(kotlin("test"))
+    }
+
+    jvmMain.dependencies {
+      implementation(compose.desktop.common)
+      implementation(compose.desktop.currentOs)
     }
 
     androidMain.dependencies {
@@ -36,6 +57,62 @@ fun Project.configureMultiplatformApplication(
       implementation(libs.compose.uitooling)
       implementation(libs.kotlinx.coroutines.android)
       implementation(libs.koin.android)
+    }
+  }
+
+  desktopExtension.application {
+    mainClass = "MainKt"
+
+    buildTypes.release.proguard {
+      configurationFiles.from(project.file("proguard-rules.pro"))
+      obfuscate.set(true)
+    }
+
+    nativeDistributions {
+      targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+      packageName = libs.applicationId
+      packageVersion = libs.versionName
+    }
+  }
+}
+
+fun Project.configureAndroidApplication() = extensions.configure<ApplicationExtension> {
+  namespace = libs.applicationId
+  compileSdk = libs.compileSdk
+
+  defaultConfig {
+    minSdk = libs.minSdk
+    targetSdk = libs.targetSdk
+
+    applicationId = libs.applicationId
+
+    versionCode = libs.versionCode
+    versionName = libs.versionName
+  }
+
+  sourceSets["main"].apply {
+    manifest.srcFile("src/androidMain/AndroidManifest.xml")
+    res.srcDirs("src/androidMain/resources")
+  }
+
+  buildTypes {
+    release {
+      isMinifyEnabled = true
+
+      signingConfig = signingConfigs.getByName("debug")
+
+      proguardFiles(
+        getDefaultProguardFile("proguard-android-optimize.txt"),
+        "proguard-rules.pro",
+      )
+    }
+    debug {
+      isMinifyEnabled = false
+
+      proguardFiles(
+        getDefaultProguardFile("proguard-android-optimize.txt"),
+        "proguard-rules.pro",
+      )
     }
   }
 }

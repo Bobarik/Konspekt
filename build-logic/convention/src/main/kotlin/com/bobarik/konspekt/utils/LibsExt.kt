@@ -19,3 +19,6 @@ val LibrariesForLibs.compileSdk: Int
 
 val LibrariesForLibs.targetSdk: Int
   get() = versions.targetSdk.get().toInt()
+
+val LibrariesForLibs.javaVersion: Int
+  get() = versions.java.get().toInt()

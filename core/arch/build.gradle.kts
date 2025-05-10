@@ -1,34 +1,25 @@
 plugins {
-  alias(libs.plugins.multiplatform)
+  id("konspekt.library")
+
   alias(libs.plugins.compose.library)
   alias(libs.plugins.compose.compiler)
-  alias(libs.plugins.buildConfig)
-  alias(libs.plugins.kotlinx.serialization)
 }
 
-kotlin {
-  jvm()
+dependencies {
+  commonMainImplementation(compose.runtime)
 
-  sourceSets {
-    commonMain.dependencies {
-      implementation(compose.runtime)
+  commonMainImplementation(libs.essenty.lifecycle)
+  commonMainImplementation(libs.essenty.lifecycle.coroutines)
 
-      implementation(libs.essenty.lifecycle)
-      implementation(libs.essenty.lifecycle.coroutines)
+  commonMainImplementation(libs.decompose)
+  commonMainImplementation(libs.decompose.compose)
 
-      implementation(libs.decompose)
-      implementation(libs.decompose.compose)
+  commonMainApi(libs.orbit.core)
+  commonMainImplementation(libs.napier)
+  commonMainImplementation(libs.kotlinx.coroutines.core)
 
-      api(libs.orbit.core)
-      implementation(libs.napier)
-      implementation(libs.kotlinx.coroutines.core)
+  commonMainImplementation(platform(libs.koin.bom))
+  commonMainImplementation(libs.koin.core)
 
-      implementation(project.dependencies.platform(libs.koin.bom))
-      implementation(libs.koin.core)
-    }
-
-    jvmMain.dependencies {
-      implementation(libs.kotlinx.coroutines.swing)
-    }
-  }
+  jvmMainImplementation(libs.kotlinx.coroutines.swing)
 }

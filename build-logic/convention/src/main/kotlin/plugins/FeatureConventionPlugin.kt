@@ -24,9 +24,9 @@ class FeatureConventionPlugin : Plugin<Project> {
       apply(libs.plugins.detekt)
     }
 
-    configureMultiplatformFeature(libs)
+    configureMultiplatformFeature()
 
-    configureAndroidLibrary(libs = libs)
+    configureAndroidLibrary()
 
     dependencies {
       ksp(libs.arrow.optics.ksp)

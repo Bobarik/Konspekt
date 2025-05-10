@@ -1,16 +1,9 @@
 plugins {
-    id("konspekt.library")
+  id("konspekt.library.common")
 }
 
-kotlin {
-    sourceSets {
-        commonMain.dependencies {
-            implementation(project.dependencies.platform(libs.koin.bom))
-            implementation(libs.koin.core)
-            implementation(libs.kotlinx.coroutines.core)
-        }
-        androidMain.dependencies {
-            implementation(libs.koin.android)
-        }
-    }
+dependencies {
+  commonMainImplementation(project.dependencies.platform(libs.koin.bom))
+  commonMainImplementation(libs.koin.core)
+  commonMainImplementation(libs.kotlinx.coroutines.core)
 }

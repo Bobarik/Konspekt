@@ -1,13 +1,11 @@
 plugins {
-    id("konspekt.library.compose")
+  id("konspekt.library")
+  alias(libs.plugins.compose.library)
+  alias(libs.plugins.compose.compiler)
 }
 
-kotlin {
-    sourceSets {
-        commonMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.material3)
-            implementation(compose.components.resources)
-        }
-    }
+dependencies {
+  commonMainImplementation(compose.runtime)
+  commonMainImplementation(compose.material3)
+  commonMainImplementation(compose.components.resources)
 }
