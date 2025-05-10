@@ -7,12 +7,12 @@ import org.koin.dsl.module
 import java.io.File
 
 internal actual val DatabaseBuilderModule = module {
-    single { buildKorgyDatabase() }
+  single { buildKorgyDatabase() }
 }
 
 fun buildKorgyDatabase(): KonspektDatabase {
-    val dbFile = File(System.getProperty("java.io.tmpdir"), "my_room.db")
-    return Room.databaseBuilder<KonspektDatabase>(
-        name = dbFile.absolutePath,
-    ).setDriver(BundledSQLiteDriver()).build()
+  val dbFile = File(System.getProperty("java.io.tmpdir"), "my_room.db")
+  return Room.databaseBuilder<KonspektDatabase>(
+    name = dbFile.absolutePath,
+  ).setDriver(BundledSQLiteDriver()).build()
 }

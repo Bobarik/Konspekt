@@ -7,7 +7,7 @@ import com.bobarik.konspekt.theme.AppTheme
 
 @Composable
 internal fun App(
-    rootComponent: RootComponent,
+  rootComponent: RootComponent,
 ) = AppTheme {
-    RootScreen(rootComponent)
+  RootScreen(rootComponent)
 }

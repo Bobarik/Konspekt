@@ -8,15 +8,13 @@ import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 
 internal actual val DatabaseBuilderModule = module {
-    single { buildKonspektDatabase(androidApplication()) }
+  single { buildKonspektDatabase(androidApplication()) }
 }
 
 fun buildKonspektDatabase(context: Context): KonspektDatabase {
-    val dbFile = context.getDatabasePath("konspekt.db")
-    return Room.databaseBuilder<KonspektDatabase>(
-        context = context.applicationContext,
-        name = dbFile.absolutePath
-    )
-        .setDriver(BundledSQLiteDriver())
-        .build()
+  val dbFile = context.getDatabasePath("konspekt.db")
+  return Room.databaseBuilder<KonspektDatabase>(
+    context = context.applicationContext,
+    name = dbFile.absolutePath
+  ).setDriver(BundledSQLiteDriver()).build()
 }

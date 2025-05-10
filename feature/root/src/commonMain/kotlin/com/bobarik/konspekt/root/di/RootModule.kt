@@ -7,5 +7,5 @@ import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val RootModule = module {
-    factoryOf(::RootComponentImpl) bind RootComponent::class
+  factoryOf(::RootComponentImpl) bind RootComponent::class
 }

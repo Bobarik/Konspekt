@@ -19,62 +19,62 @@ import java.util.UUID
 
 @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
 class HomeComponentImpl(
-    componentContext: ComponentContext,
-    private val notesRepository: NoteRepository,
-    private val onBackClicked: () -> Unit
+  componentContext: ComponentContext,
+  private val notesRepository: NoteRepository,
+  private val onBackClicked: () -> Unit,
 ) : ContainerComponent<HomeState, Nothing, HomeEvent>(
-    initState = HomeState(),
-    componentContext = componentContext
+  initState = HomeState(),
+  componentContext = componentContext,
 ), HomeComponent {
 
-    private val currentSearchQuery = MutableStateFlow("")
+  private val currentSearchQuery = MutableStateFlow("")
 
-    init {
-        currentSearchQuery
-            .debounce(300L)
-            .flatMapLatest { query ->
-                reduce {
-                    state.copy {
+  init {
+    currentSearchQuery
+      .debounce(300L)
+      .flatMapLatest { query ->
+        reduce {
+          state.copy {
 
-                    }
-                }
-                if (query.isEmpty()) {
-                    notesRepository.getAllNotes()
-                } else {
-                    notesRepository.searchNotes(query)
-                }
-            }
-            .onEach { list ->
-                reduce {
-                    state.copy(
-                        generalState = HomeState.ScreenGeneralState.Content(
-                            notes = list.map(Note::toUi)
-                        )
-                    )
-                }
-            }.launchIn(coroutineScope)
-    }
-
-    override fun onEvent(event: HomeEvent) = when (event) {
-        is HomeEvent.OnQueryChanged -> onQueryChanged(event.query)
-        is HomeEvent.OnButtonClicked -> onButtonClicked()
-    }
-
-    private fun onButtonClicked() {
-        intent {
-            notesRepository.upsertNote(
-                Note(
-                    title = "Hello",
-                    note = UUID.randomUUID().toString()
-                )
-            )
+          }
         }
-    }
+        if (query.isEmpty()) {
+          notesRepository.getAllNotes()
+        } else {
+          notesRepository.searchNotes(query)
+        }
+      }
+      .onEach { list ->
+        reduce {
+          state.copy(
+            generalState = HomeState.ScreenGeneralState.Content(
+              notes = list.map(Note::toUi),
+            ),
+          )
+        }
+      }.launchIn(coroutineScope)
+  }
 
-    private fun onQueryChanged(query: String) = blockingReduce {
-        currentSearchQuery.value = query
-        state.copy(searchQuery = query)
-    }
+  override fun onEvent(event: HomeEvent) = when (event) {
+    is HomeEvent.OnQueryChanged -> onQueryChanged(event.query)
+    is HomeEvent.OnButtonClicked -> onButtonClicked()
+  }
 
-    private fun onNavigateBack() = onBackClicked()
+  private fun onButtonClicked() {
+    intent {
+      notesRepository.upsertNote(
+        Note(
+          title = "Hello",
+          note = UUID.randomUUID().toString(),
+        ),
+      )
+    }
+  }
+
+  private fun onQueryChanged(query: String) = blockingReduce {
+    currentSearchQuery.value = query
+    state.copy(searchQuery = query)
+  }
+
+  private fun onNavigateBack() = onBackClicked()
 }

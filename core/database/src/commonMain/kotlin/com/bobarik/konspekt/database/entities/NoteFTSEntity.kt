@@ -8,8 +8,8 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "notes_fts")
 @Fts4(contentEntity = NoteEntity::class)
 data class NoteFTSEntity(
-    @PrimaryKey @ColumnInfo(name = "rowid") val rowId: Long,
-    @ColumnInfo(name = "id") val id: Long,
-    @ColumnInfo(name = "title") val title: String,
-    @ColumnInfo(name = "note") val note: String
+  @PrimaryKey @ColumnInfo(name = "rowid") val rowId: Long,
+  @ColumnInfo(name = "id") val id: Long,
+  @ColumnInfo(name = "title") val title: String,
+  @ColumnInfo(name = "note") val note: String,
 )

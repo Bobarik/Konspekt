@@ -7,11 +7,11 @@ import com.bobarik.konspekt.home.component.HomeComponent
 
 @Composable
 fun HomeScreen(
-    homeComponent: HomeComponent
+  homeComponent: HomeComponent,
 ) {
-    val state by homeComponent.collectState()
+  val state by homeComponent.collectState()
 
-    HomeScreenContent(state, homeComponent::onEvent)
+  HomeScreenContent(state, homeComponent::onEvent)
 }
 
 

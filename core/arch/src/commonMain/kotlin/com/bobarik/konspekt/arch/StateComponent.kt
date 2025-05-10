@@ -4,7 +4,7 @@ import com.arkivanov.decompose.ComponentContext
 import org.orbitmvi.orbit.ContainerHost
 
 interface StateComponent<STATE : Any, SIDE_EFFECT : Any, EVENT>
-    : ComponentContext, ContainerHost<STATE, SIDE_EFFECT> {
+  : ComponentContext, ContainerHost<STATE, SIDE_EFFECT> {
 
-    fun onEvent(event: EVENT)
+  fun onEvent(event: EVENT)
 }

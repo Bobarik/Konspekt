@@ -9,16 +9,17 @@ import org.gradle.api.Project
 
 class ComposeLibraryConventionPlugin : Plugin<Project> {
 
-    override fun apply(target: Project) = with(target) {
-        with(pluginManager) {
-            apply(libs.plugins.multiplatform)
-            apply(libs.plugins.android.library)
-            apply(libs.plugins.compose.library)
-            apply(libs.plugins.compose.compiler)
-        }
-
-        configureMultiplatformTargets()
-
-        configureAndroidLibrary(libs = libs)
+  override fun apply(target: Project) = with(target) {
+    with(pluginManager) {
+      apply(libs.plugins.multiplatform)
+      apply(libs.plugins.android.library)
+      apply(libs.plugins.compose.library)
+      apply(libs.plugins.compose.compiler)
+      apply(libs.plugins.detekt)
     }
+
+    configureMultiplatformTargets()
+
+    configureAndroidLibrary(libs = libs)
+  }
 }

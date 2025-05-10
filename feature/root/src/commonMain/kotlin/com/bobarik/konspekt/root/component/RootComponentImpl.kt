@@ -16,48 +16,47 @@ import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
 
 class RootComponentImpl(
-    componentContext: ComponentContext
+  componentContext: ComponentContext,
 ) : RootComponent, ComponentContext by componentContext {
 
-    private val navigation = StackNavigation<Config>()
+  private val navigation = StackNavigation<Config>()
 
-    override val childStack: Value<ChildStack<*, RootComponent.Child>> = childStack(
-        source = navigation,
-        serializer = Config.serializer(),
-        initialConfiguration = Config.Login,
-        handleBackButton = true,
-        childFactory = ::createChild,
-    )
+  override val childStack: Value<ChildStack<*, RootComponent.Child>> = childStack(
+    source = navigation,
+    serializer = Config.serializer(),
+    initialConfiguration = Config.Login,
+    handleBackButton = true,
+    childFactory = ::createChild,
+  )
 
-    private fun createChild(
-        config: Config,
-        componentContext: ComponentContext
-    ): RootComponent.Child =
-        when (config) {
-            is Config.Login -> LoginChild(itemLogin(componentContext))
-            is Config.Home -> HomeChild(itemHome(componentContext))
-        }
+  private fun createChild(
+    config: Config,
+    componentContext: ComponentContext,
+  ): RootComponent.Child = when (config) {
+    is Config.Login -> LoginChild(itemLogin(componentContext))
+    is Config.Home -> HomeChild(itemHome(componentContext))
+  }
 
-    private fun itemLogin(
-        componentContext: ComponentContext
-    ) = get<LoginComponent> { parametersOf(componentContext, ::onHome) }
+  private fun itemLogin(
+    componentContext: ComponentContext,
+  ) = get<LoginComponent> { parametersOf(componentContext, ::onHome) }
 
-    private fun itemHome(
-        componentContext: ComponentContext
-    ) = get<HomeComponent> { parametersOf(componentContext, ::onBack) }
+  private fun itemHome(
+    componentContext: ComponentContext,
+  ) = get<HomeComponent> { parametersOf(componentContext, ::onBack) }
 
-    private fun onBack() = navigation.pop()
+  private fun onBack() = navigation.pop()
 
-    private fun onHome() = navigation.push(Config.Home)
+  private fun onHome() = navigation.push(Config.Home)
+
+  @Serializable
+  private sealed interface Config {
 
     @Serializable
-    private sealed interface Config {
+    data object Login : Config
 
-        @Serializable
-        data object Login : Config
-
-        @Serializable
-        data object Home : Config
-    }
+    @Serializable
+    data object Home : Config
+  }
 
 }

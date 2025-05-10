@@ -6,36 +6,36 @@ import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 fun Project.configureMultiplatformApplication(
-    libs: LibrariesForLibs
+  libs: LibrariesForLibs,
 ) = extensions.configure<KotlinMultiplatformExtension> {
 
-    applyPlatformTargets(libs)
+  applyPlatformTargets(libs)
 
-    sourceSets.apply {
-        commonMain.dependencies {
-            implementation(libs.napier)
+  sourceSets.apply {
+    commonMain.dependencies {
+      implementation(libs.napier)
 
-            implementation(libs.kotlinx.coroutines.core)
+      implementation(libs.kotlinx.coroutines.core)
 
-            implementation(libs.ktor.core)
+      implementation(libs.ktor.core)
 
-            implementation(project.dependencies.platform(libs.koin.bom))
-            implementation(libs.koin.core)
+      implementation(project.dependencies.platform(libs.koin.bom))
+      implementation(libs.koin.core)
 
-            implementation(libs.decompose)
-            implementation(libs.essenty.lifecycle)
-        }
-
-        commonTest.dependencies {
-            implementation(kotlin("test"))
-        }
-
-        androidMain.dependencies {
-            implementation(libs.androidx.appcompat)
-            implementation(libs.androidx.activityCompose)
-            implementation(libs.compose.uitooling)
-            implementation(libs.kotlinx.coroutines.android)
-            implementation(libs.koin.android)
-        }
+      implementation(libs.decompose)
+      implementation(libs.essenty.lifecycle)
     }
+
+    commonTest.dependencies {
+      implementation(kotlin("test"))
+    }
+
+    androidMain.dependencies {
+      implementation(libs.androidx.appcompat)
+      implementation(libs.androidx.activityCompose)
+      implementation(libs.compose.uitooling)
+      implementation(libs.kotlinx.coroutines.android)
+      implementation(libs.koin.android)
+    }
+  }
 }

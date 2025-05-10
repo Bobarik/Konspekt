@@ -7,5 +7,5 @@ import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val LoginModule = module {
-    factoryOf(::LoginComponentImpl) bind LoginComponent::class
+  factoryOf(::LoginComponentImpl) bind LoginComponent::class
 }

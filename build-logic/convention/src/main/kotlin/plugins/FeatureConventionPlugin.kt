@@ -13,28 +13,29 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 class FeatureConventionPlugin : Plugin<Project> {
 
-    override fun apply(target: Project) = with(target) {
-        with(pluginManager) {
-            apply(libs.plugins.multiplatform)
-            apply(libs.plugins.android.library)
-            apply(libs.plugins.compose.library)
-            apply(libs.plugins.compose.compiler)
-            apply(libs.plugins.kotlinx.serialization)
-            apply(libs.plugins.ksp)
-        }
-
-        configureMultiplatformFeature(libs)
-
-        configureAndroidLibrary(libs = libs)
-
-        dependencies {
-            ksp(libs.arrow.optics.ksp)
-        }
-
-        tasks.withType<KotlinCompile>().all {
-            if (name != "kspCommonMainKotlinMetadata") {
-                dependsOn("kspCommonMainKotlinMetadata")
-            }
-        }
+  override fun apply(target: Project) = with(target) {
+    with(pluginManager) {
+      apply(libs.plugins.multiplatform)
+      apply(libs.plugins.android.library)
+      apply(libs.plugins.compose.library)
+      apply(libs.plugins.compose.compiler)
+      apply(libs.plugins.kotlinx.serialization)
+      apply(libs.plugins.ksp)
+      apply(libs.plugins.detekt)
     }
+
+    configureMultiplatformFeature(libs)
+
+    configureAndroidLibrary(libs = libs)
+
+    dependencies {
+      ksp(libs.arrow.optics.ksp)
+    }
+
+    tasks.withType<KotlinCompile>().all {
+      if (name != "kspCommonMainKotlinMetadata") {
+        dependsOn("kspCommonMainKotlinMetadata")
+      }
+    }
+  }
 }

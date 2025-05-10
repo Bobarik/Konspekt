@@ -40,96 +40,97 @@ import kotlin.math.roundToInt
 
 @Composable
 internal fun HomeScreenContent(
-    state: HomeState,
-    onEvent: (HomeEvent) -> Unit
+  state: HomeState,
+  onEvent: (HomeEvent) -> Unit,
 ) = Scaffold(
-    floatingActionButton = {
-        FloatingActionButton(
-            onClick = { onEvent(HomeEvent.OnButtonClicked) },
-        ) {
-            Icon(imageVector = Icons.Default.Add, contentDescription = null)
-        }
-    }
-) { insetPadding ->
-    Column(
-        modifier = Modifier
-            .padding(insetPadding)
-            .fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(12.dp),
+  floatingActionButton = {
+    FloatingActionButton(
+      onClick = { onEvent(HomeEvent.OnButtonClicked) },
     ) {
-        AnimatedContent(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f),
-            targetState = state.generalState,
-            contentKey = { it::class }
-        ) { generalState ->
-            when (generalState) {
-                is HomeState.ScreenGeneralState.Content -> HomeScreenNotesContent(
-                    state.searchQuery,
-                    generalState,
-                    onEvent
-                )
-                is HomeState.ScreenGeneralState.Empty -> HomeScreenEmptyStub()
-                HomeState.ScreenGeneralState.Loading -> HomeScreenLoadingContent()
-            }
-        }
+      Icon(imageVector = Icons.Default.Add, contentDescription = null)
     }
+  }
+) { insetPadding ->
+  Column(
+    modifier = Modifier
+      .padding(insetPadding)
+      .fillMaxSize(),
+    verticalArrangement = Arrangement.spacedBy(12.dp),
+  ) {
+    AnimatedContent(
+      modifier = Modifier
+        .fillMaxWidth()
+        .weight(1f),
+      targetState = state.generalState,
+      contentKey = { it::class }
+    ) { generalState ->
+      when (generalState) {
+        is HomeState.ScreenGeneralState.Content -> HomeScreenNotesContent(
+          state.searchQuery,
+          generalState,
+          onEvent
+        )
+
+        is HomeState.ScreenGeneralState.Empty -> HomeScreenEmptyStub()
+        HomeState.ScreenGeneralState.Loading -> HomeScreenLoadingContent()
+      }
+    }
+  }
 }
 
 @Composable
 internal fun ColumnScope.HomeScreenEmptyStub() {
-    Text(text = "Create your first note!")
+  Text(text = "Create your first note!")
 }
 
 @Composable
 internal fun ColumnScope.HomeScreenLoadingContent() = Box(
-    modifier = Modifier
-        .fillMaxWidth()
-        .weight(1f),
-    contentAlignment = Alignment.Center
+  modifier = Modifier
+    .fillMaxWidth()
+    .weight(1f),
+  contentAlignment = Alignment.Center
 ) {
-    val infiniteTransition = rememberInfiniteTransition()
-    val numberOfDots by infiniteTransition.animateFloat(
-        initialValue = 0.5f,
-        targetValue = 3.5f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(3000, easing = LinearEasing),
-            repeatMode = RepeatMode.Restart
-        )
+  val infiniteTransition = rememberInfiniteTransition()
+  val numberOfDots by infiniteTransition.animateFloat(
+    initialValue = 0.5f,
+    targetValue = 3.5f,
+    animationSpec = infiniteRepeatable(
+      animation = tween(3000, easing = LinearEasing),
+      repeatMode = RepeatMode.Restart
     )
-    val dots by remember { derivedStateOf { ".".repeat(numberOfDots.roundToInt()) } }
+  )
+  val dots by remember { derivedStateOf { ".".repeat(numberOfDots.roundToInt()) } }
 
-    Text(text = "Loading$dots")
+  Text(text = "Loading$dots")
 }
 
 @Composable
 internal fun ColumnScope.HomeScreenNotesContent(
-    query: String,
-    generalState: HomeState.ScreenGeneralState.Content,
-    onEvent: (HomeEvent) -> Unit
+  query: String,
+  generalState: HomeState.ScreenGeneralState.Content,
+  onEvent: (HomeEvent) -> Unit,
 ) = LazyVerticalGrid(
-    modifier = Modifier
-        .fillMaxWidth()
-        .weight(1f),
-    columns = GridCells.Fixed(2),
-    verticalArrangement = Arrangement.spacedBy(12.dp),
-    horizontalArrangement = Arrangement.spacedBy(12.dp),
-    contentPadding = PaddingValues(12.dp)
+  modifier = Modifier
+    .fillMaxWidth()
+    .weight(1f),
+  columns = GridCells.Fixed(2),
+  verticalArrangement = Arrangement.spacedBy(12.dp),
+  horizontalArrangement = Arrangement.spacedBy(12.dp),
+  contentPadding = PaddingValues(12.dp)
 ) {
-    item(
-        span = { GridItemSpan(this.maxCurrentLineSpan) }
-    ) {
-        OutlinedTextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = query,
-            onValueChange = { text -> onEvent(HomeEvent.OnQueryChanged(text)) }
-        )
-    }
-    items(
-        items = generalState.notes,
-        key = { it.id }
-    ) { note ->
-        HomeNoteItem(note = note)
-    }
+  item(
+    span = { GridItemSpan(this.maxCurrentLineSpan) }
+  ) {
+    OutlinedTextField(
+      modifier = Modifier.fillMaxWidth(),
+      value = query,
+      onValueChange = { text -> onEvent(HomeEvent.OnQueryChanged(text)) }
+    )
+  }
+  items(
+    items = generalState.notes,
+    key = { it.id }
+  ) { note ->
+    HomeNoteItem(note = note)
+  }
 }

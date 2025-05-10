@@ -10,22 +10,22 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface NoteDao {
 
-    @Upsert
-    suspend fun upsertNote(note: NoteEntity)
+  @Upsert
+  suspend fun upsertNote(note: NoteEntity)
 
-    @Delete
-    suspend fun deleteNote(note: NoteEntity)
+  @Delete
+  suspend fun deleteNote(note: NoteEntity)
 
-    @Query("SELECT * from notes")
-    fun getAllNotes(): Flow<List<NoteEntity>>
+  @Query("SELECT * from notes")
+  fun getAllNotes(): Flow<List<NoteEntity>>
 
-    @Query(
-        """
-            SELECT * 
-            FROM notes_fts
-            JOIN notes ON notes.id = notes_fts.id
-            WHERE notes_fts MATCH :query
-        """
-    )
-    fun searchNotes(query: String): Flow<List<NoteEntity>>
+  @Query(
+    """
+      SELECT * 
+      FROM notes_fts
+      JOIN notes ON notes.id = notes_fts.id
+      WHERE notes_fts MATCH :query
+    """
+  )
+  fun searchNotes(query: String): Flow<List<NoteEntity>>
 }

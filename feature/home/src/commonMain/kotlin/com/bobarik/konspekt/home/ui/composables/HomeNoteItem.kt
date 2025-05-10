@@ -16,16 +16,16 @@ import com.bobarik.konspekt.home.model.NoteUi
 
 @Composable
 fun LazyGridItemScope.HomeNoteItem(
-    modifier: Modifier = Modifier,
-    note: NoteUi
+  modifier: Modifier = Modifier,
+  note: NoteUi,
 ) = Column(
-    modifier = modifier.fillMaxWidth()
-        .animateItem(fadeInSpec = null, fadeOutSpec = null)
-        .clip(MaterialTheme.shapes.large)
-        .background(MaterialTheme.colorScheme.primary)
-        .padding(12.dp),
-    verticalArrangement = Arrangement.spacedBy(16.dp)
+  modifier = modifier.fillMaxWidth()
+    .animateItem(fadeInSpec = null, fadeOutSpec = null)
+    .clip(MaterialTheme.shapes.large)
+    .background(MaterialTheme.colorScheme.primary)
+    .padding(12.dp),
+  verticalArrangement = Arrangement.spacedBy(16.dp)
 ) {
-    Text(text = note.title)
-    Text(text = note.note)
+  Text(text = note.title)
+  Text(text = note.note)
 }

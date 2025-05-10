@@ -13,32 +13,32 @@ import com.arkivanov.essenty.lifecycle.coroutines.withLifecycle
 
 @Composable
 fun <SIDE_EFFECT : Any> StateComponent<*, SIDE_EFFECT, *>.collectSideEffect(
-    lifecycleState: Lifecycle.State = Lifecycle.State.STARTED,
-    sideEffect: (suspend (sideEffect: SIDE_EFFECT) -> Unit)
+  lifecycleState: Lifecycle.State = Lifecycle.State.STARTED,
+  sideEffect: (suspend (sideEffect: SIDE_EFFECT) -> Unit),
 ) {
-    val sideEffectFlow = container.sideEffectFlow
-    val lifecycleOwner = this
+  val sideEffectFlow = container.sideEffectFlow
+  val lifecycleOwner = this
 
-    val callback by rememberUpdatedState(newValue = sideEffect)
+  val callback by rememberUpdatedState(newValue = sideEffect)
 
-    LaunchedEffect(sideEffectFlow, lifecycleOwner) {
-        lifecycleOwner.repeatOnLifecycle(lifecycleState) {
-            sideEffectFlow.collect { callback(it) }
-        }
+  LaunchedEffect(sideEffectFlow, lifecycleOwner) {
+    lifecycleOwner.repeatOnLifecycle(lifecycleState) {
+      sideEffectFlow.collect { callback(it) }
     }
+  }
 }
 
 @Composable
 fun <STATE : Any> StateComponent<STATE, *, *>.collectState(
-    lifecycleState: Lifecycle.State = Lifecycle.State.STARTED
+  lifecycleState: Lifecycle.State = Lifecycle.State.STARTED,
 ): State<STATE> {
-    val stateFlow = container.stateFlow
-    val lifecycleOwner = this
+  val stateFlow = container.stateFlow
+  val lifecycleOwner = this
 
-    val stateFlowLifecycleAware = remember(stateFlow, lifecycleOwner) {
-        stateFlow.withLifecycle(lifecycleOwner.lifecycle, lifecycleState)
-    }
+  val stateFlowLifecycleAware = remember(stateFlow, lifecycleOwner) {
+    stateFlow.withLifecycle(lifecycleOwner.lifecycle, lifecycleState)
+  }
 
-    val initialValue = stateFlow.value
-    return stateFlowLifecycleAware.collectAsState(initialValue)
+  val initialValue = stateFlow.value
+  return stateFlowLifecycleAware.collectAsState(initialValue)
 }

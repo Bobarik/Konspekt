@@ -1,17 +1,17 @@
 plugins {
-    id("konspekt.feature")
+  id("konspekt.feature")
 }
 
 kotlin {
-    sourceSets {
-        commonMain.dependencies {
-            implementation(projects.feature.login)
-            implementation(projects.feature.home)
+  sourceSets {
+    commonMain.dependencies {
+      implementation(projects.feature.login)
+      implementation(projects.feature.home)
 
-            implementation(compose.runtime)
-            implementation(compose.material3)
-            implementation(compose.materialIconsExtended)
-            implementation(compose.components.resources)
-        }
+      implementation(compose.runtime)
+      implementation(compose.material3)
+      implementation(compose.materialIconsExtended)
+      implementation(compose.components.resources)
     }
+  }
 }

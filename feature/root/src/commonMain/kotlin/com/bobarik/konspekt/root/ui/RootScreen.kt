@@ -10,13 +10,13 @@ import com.bobarik.konspekt.root.component.RootComponent
 
 @Composable
 fun RootScreen(
-    rootComponent: RootComponent
+  rootComponent: RootComponent,
 ) = Children(
-    stack = rootComponent.childStack,
-    animation = stackAnimation(slide())
+  stack = rootComponent.childStack,
+  animation = stackAnimation(slide()),
 ) {
-    when (val child = it.instance) {
-        is RootComponent.Child.LoginChild -> LoginScreen(child.component)
-        is RootComponent.Child.HomeChild -> HomeScreen(child.component)
-    }
+  when (val child = it.instance) {
+    is RootComponent.Child.LoginChild -> LoginScreen(child.component)
+    is RootComponent.Child.HomeChild -> HomeScreen(child.component)
+  }
 }

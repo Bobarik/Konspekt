@@ -7,5 +7,5 @@ import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val HomeModule = module {
-    factoryOf(::HomeComponentImpl) bind HomeComponent::class
+  factoryOf(::HomeComponentImpl) bind HomeComponent::class
 }

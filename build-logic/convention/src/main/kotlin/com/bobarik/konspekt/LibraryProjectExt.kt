@@ -9,23 +9,24 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
-fun Project.configureAndroidLibrary(libs: LibrariesForLibs) = extensions.configure<LibraryExtension> {
+fun Project.configureAndroidLibrary(libs: LibrariesForLibs) =
+  extensions.configure<LibraryExtension> {
     compileSdk = libs.compileSdk
 
     val moduleNamespace = "${libs.applicationId}.${path.split(':')[2]}"
     namespace = moduleNamespace
-}
+  }
 
 fun Project.configureMultiplatformTargets() = extensions.configure<KotlinMultiplatformExtension> {
-    applyPlatformTargets(libs)
+  applyPlatformTargets(libs)
 }
 
 fun KotlinMultiplatformExtension.applyPlatformTargets(
-    libs: LibrariesForLibs
+  libs: LibrariesForLibs,
 ) {
-    androidTarget()
-    jvm()
-    applyDefaultHierarchyTemplate()
+  androidTarget()
+  jvm()
+  applyDefaultHierarchyTemplate()
 
-    jvmToolchain(libs.versions.java.get().toInt())
+  jvmToolchain(libs.versions.java.get().toInt())
 }

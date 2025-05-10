@@ -31,78 +31,78 @@ import com.bobarik.konspekt.login.component.LoginState
 
 @Composable
 internal fun LoginScreenContent(
-    stateProvider: () -> LoginState,
-    onEvent: LoginEvent.() -> Unit
+  stateProvider: () -> LoginState,
+  onEvent: LoginEvent.() -> Unit,
 ) = Column(modifier = Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing)) {
 
-    Row(
-        horizontalArrangement = Arrangement.Center
-    ) {
-        Text(
-            text = "Login",
-            style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.padding(16.dp)
-        )
-    }
-
-    OutlinedTextField(
-        value = stateProvider().login,
-        onValueChange = {
-            LoginEvent.OnLoginChanged(it).onEvent()
-        },
-        label = { Text("Email") },
-        singleLine = true,
-        modifier = Modifier.fillMaxWidth().padding(16.dp)
+  Row(
+    horizontalArrangement = Arrangement.Center,
+  ) {
+    Text(
+      text = "Login",
+      style = MaterialTheme.typography.titleMedium,
+      modifier = Modifier.padding(16.dp),
     )
+  }
 
-    OutlinedTextField(
-        value = stateProvider().password,
-        onValueChange = {
-            LoginEvent.OnPasswordChanged(it).onEvent()
-        },
-        label = { Text("Password") },
-        singleLine = true,
-        visualTransformation = if (stateProvider().isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-        modifier = Modifier.fillMaxWidth().padding(16.dp),
-        keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Password
-        ),
-        trailingIcon = {
-            IconButton(
-                onClick = {
-                    LoginEvent.OnPasswordVisibilityChanged.onEvent()
-                }
-            ) {
-                val imageVector =
-                    if (stateProvider().isPasswordVisible) Icons.Default.Close else Icons.Default.Edit
-                Icon(
-                    imageVector,
-                    contentDescription = if (stateProvider().isPasswordVisible) "Hide password" else "Show password"
-                )
-            }
-        }
-    )
+  OutlinedTextField(
+    value = stateProvider().login,
+    onValueChange = {
+      LoginEvent.OnLoginChanged(it).onEvent()
+    },
+    label = { Text("Email") },
+    singleLine = true,
+    modifier = Modifier.fillMaxWidth().padding(16.dp),
+  )
 
-    Button(
-        onClick = { /* Handle login logic here */ },
-        modifier = Modifier.fillMaxWidth().padding(16.dp)
-    ) {
-        Text("Login")
-    }
-
-    TextButton(
-        onClick = { },
-        modifier = Modifier.fillMaxWidth().padding(16.dp)
-    ) {
-        Text("Open github")
-    }
-
-    TextButton(
+  OutlinedTextField(
+    value = stateProvider().password,
+    onValueChange = {
+      LoginEvent.OnPasswordChanged(it).onEvent()
+    },
+    label = { Text("Password") },
+    singleLine = true,
+    visualTransformation = if (stateProvider().isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+    modifier = Modifier.fillMaxWidth().padding(16.dp),
+    keyboardOptions = KeyboardOptions(
+      keyboardType = KeyboardType.Password,
+    ),
+    trailingIcon = {
+      IconButton(
         onClick = {
-            LoginEvent.OnHomeNavigateClick.onEvent()
+          LoginEvent.OnPasswordVisibilityChanged.onEvent()
         },
-        modifier = Modifier.fillMaxWidth().padding(16.dp)
-    ) {
-        Text("Open home screen")
-    }
+      ) {
+        val imageVector =
+          if (stateProvider().isPasswordVisible) Icons.Default.Close else Icons.Default.Edit
+        Icon(
+          imageVector,
+          contentDescription = if (stateProvider().isPasswordVisible) "Hide password" else "Show password",
+        )
+      }
+    },
+  )
+
+  Button(
+    onClick = { /* Handle login logic here */ },
+    modifier = Modifier.fillMaxWidth().padding(16.dp),
+  ) {
+    Text("Login")
+  }
+
+  TextButton(
+    onClick = { },
+    modifier = Modifier.fillMaxWidth().padding(16.dp),
+  ) {
+    Text("Open github")
+  }
+
+  TextButton(
+    onClick = {
+      LoginEvent.OnHomeNavigateClick.onEvent()
+    },
+    modifier = Modifier.fillMaxWidth().padding(16.dp),
+  ) {
+    Text("Open home screen")
+  }
 }

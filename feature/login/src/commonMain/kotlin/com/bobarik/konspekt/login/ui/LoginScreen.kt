@@ -7,13 +7,13 @@ import com.bobarik.konspekt.login.component.LoginComponent
 
 @Composable
 fun LoginScreen(
-    loginComponent: LoginComponent
+  loginComponent: LoginComponent,
 ) {
 
-    val state by loginComponent.collectState()
+  val state by loginComponent.collectState()
 
-    LoginScreenContent(
-        stateProvider = { state },
-        onEvent = loginComponent::onEvent
-    )
+  LoginScreenContent(
+    stateProvider = { state },
+    onEvent = loginComponent::onEvent,
+  )
 }

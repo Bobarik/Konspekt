@@ -10,10 +10,10 @@ import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val DatabaseModule = module {
-    includes(DatabaseBuilderModule)
+  includes(DatabaseBuilderModule)
 
-    singleOf(::NoteRepositoryImpl) bind NoteRepository::class
-    single<NoteDao> { get<KonspektDatabase>().noteDao() }
+  singleOf(::NoteRepositoryImpl) bind NoteRepository::class
+  single<NoteDao> { get<KonspektDatabase>().noteDao() }
 }
 
 internal expect val DatabaseBuilderModule: Module

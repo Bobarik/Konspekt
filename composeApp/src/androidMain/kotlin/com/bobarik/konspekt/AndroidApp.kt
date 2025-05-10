@@ -9,14 +9,14 @@ import org.koin.core.context.startKoin
 
 class AndroidApp : Application() {
 
-    override fun onCreate() {
-        super.onCreate()
-        Napier.base(DebugAntilog())
-        startKoin {
-            androidContext(this@AndroidApp)
-            modules(
-                AppModule
-            )
-        }
+  override fun onCreate() {
+    super.onCreate()
+    Napier.base(DebugAntilog())
+    startKoin {
+      androidContext(this@AndroidApp)
+      modules(
+        AppModule,
+      )
     }
+  }
 }

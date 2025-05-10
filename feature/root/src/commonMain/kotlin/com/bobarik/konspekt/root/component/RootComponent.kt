@@ -7,8 +7,8 @@ import com.bobarik.konspekt.navigation.StackComponent
 
 interface RootComponent : StackComponent<RootComponent.Child> {
 
-    sealed interface Child: BaseChild {
-        class LoginChild(val component: LoginComponent) : Child
-        class HomeChild(val component: HomeComponent) : Child
-    }
+  sealed interface Child : BaseChild {
+    class LoginChild(val component: LoginComponent) : Child
+    class HomeChild(val component: HomeComponent) : Child
+  }
 }

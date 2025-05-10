@@ -6,47 +6,47 @@ import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 fun Project.configureMultiplatformFeature(
-    libs: LibrariesForLibs
+  libs: LibrariesForLibs,
 ) = extensions.configure<KotlinMultiplatformExtension> {
 
-    applyPlatformTargets(libs)
+  applyPlatformTargets(libs)
 
-    sourceSets.apply {
-        commonMain {
-            kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
+  sourceSets.apply {
+    commonMain {
+      kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
 
-            dependencies {
-                implementation(project(":core:arch"))
-                implementation(project(":core:domain"))
-                implementation(project(":core:navigation"))
+      dependencies {
+        implementation(project(":core:arch"))
+        implementation(project(":core:domain"))
+        implementation(project(":core:navigation"))
 
-                implementation(libs.napier)
-                implementation(libs.kotlinx.coroutines.core)
+        implementation(libs.napier)
+        implementation(libs.kotlinx.coroutines.core)
 
-                implementation(project.dependencies.platform(libs.koin.bom))
-                implementation(libs.koin.core)
-                implementation(libs.koin.compose)
+        implementation(project.dependencies.platform(libs.koin.bom))
+        implementation(libs.koin.core)
+        implementation(libs.koin.compose)
 
-                implementation(libs.decompose)
-                implementation(libs.decompose.compose)
+        implementation(libs.decompose)
+        implementation(libs.decompose.compose)
 
-                implementation(libs.orbit.core)
+        implementation(libs.orbit.core)
 
-                implementation(libs.arrow.core)
-                implementation(libs.arrow.coroutines)
-                implementation(libs.arrow.optics)
-            }
-        }
-
-        commonTest.dependencies {
-            implementation(kotlin("test"))
-        }
-
-        androidMain.dependencies {
-            implementation(libs.koin.android)
-
-            implementation(libs.compose.uitooling)
-            implementation(libs.kotlinx.coroutines.android)
-        }
+        implementation(libs.arrow.core)
+        implementation(libs.arrow.coroutines)
+        implementation(libs.arrow.optics)
+      }
     }
+
+    commonTest.dependencies {
+      implementation(kotlin("test"))
+    }
+
+    androidMain.dependencies {
+      implementation(libs.koin.android)
+
+      implementation(libs.compose.uitooling)
+      implementation(libs.kotlinx.coroutines.android)
+    }
+  }
 }

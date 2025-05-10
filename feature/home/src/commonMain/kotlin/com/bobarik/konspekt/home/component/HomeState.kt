@@ -5,20 +5,20 @@ import com.bobarik.konspekt.home.model.NoteUi
 
 @optics
 data class HomeState(
-    val searchQuery: String = "",
-    val generalState: ScreenGeneralState = ScreenGeneralState.Loading
+  val searchQuery: String = "",
+  val generalState: ScreenGeneralState = ScreenGeneralState.Loading,
 ) {
 
-    companion object;
+  companion object;
 
-    sealed interface ScreenGeneralState {
+  sealed interface ScreenGeneralState {
 
-        data class Content(val notes: List<NoteUi>) : ScreenGeneralState {
-            companion object
-        }
-
-        data object Loading : ScreenGeneralState
-
-        data object Empty : ScreenGeneralState
+    data class Content(val notes: List<NoteUi>) : ScreenGeneralState {
+      companion object
     }
+
+    data object Loading : ScreenGeneralState
+
+    data object Empty : ScreenGeneralState
+  }
 }

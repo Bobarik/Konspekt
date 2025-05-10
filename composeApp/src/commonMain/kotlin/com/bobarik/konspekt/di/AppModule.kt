@@ -7,5 +7,10 @@ import com.bobarik.konspekt.root.di.RootModule
 import org.koin.dsl.module
 
 val AppModule = module {
-    includes(RootModule, LoginModule, HomeModule, DatabaseModule)
+  includes(
+    RootModule,
+    LoginModule,
+    HomeModule,
+    DatabaseModule,
+  )
 }

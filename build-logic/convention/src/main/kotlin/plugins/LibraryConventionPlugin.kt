@@ -9,14 +9,15 @@ import org.gradle.api.Project
 
 class LibraryConventionPlugin : Plugin<Project> {
 
-    override fun apply(target: Project) = with(target) {
-        with(pluginManager) {
-            apply(libs.plugins.multiplatform)
-            apply(libs.plugins.android.library)
-        }
-
-        configureMultiplatformTargets()
-
-        configureAndroidLibrary(libs = libs)
+  override fun apply(target: Project) = with(target) {
+    with(pluginManager) {
+      apply(libs.plugins.multiplatform)
+      apply(libs.plugins.android.library)
+      apply(libs.plugins.detekt)
     }
+
+    configureMultiplatformTargets()
+
+    configureAndroidLibrary(libs = libs)
+  }
 }
