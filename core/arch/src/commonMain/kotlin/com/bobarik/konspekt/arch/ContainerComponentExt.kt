@@ -12,7 +12,7 @@ import com.arkivanov.essenty.lifecycle.coroutines.repeatOnLifecycle
 import com.arkivanov.essenty.lifecycle.coroutines.withLifecycle
 
 @Composable
-fun <SIDE_EFFECT : BaseSideEffect> StateComponent<*, SIDE_EFFECT, *>.collectSideEffect(
+fun <SIDE_EFFECT : Any> StateComponent<*, SIDE_EFFECT, *>.collectSideEffect(
     lifecycleState: Lifecycle.State = Lifecycle.State.STARTED,
     sideEffect: (suspend (sideEffect: SIDE_EFFECT) -> Unit)
 ) {
@@ -29,7 +29,7 @@ fun <SIDE_EFFECT : BaseSideEffect> StateComponent<*, SIDE_EFFECT, *>.collectSide
 }
 
 @Composable
-fun <STATE : BaseState> StateComponent<STATE, *, *>.collectState(
+fun <STATE : Any> StateComponent<STATE, *, *>.collectState(
     lifecycleState: Lifecycle.State = Lifecycle.State.STARTED
 ): State<STATE> {
     val stateFlow = container.stateFlow

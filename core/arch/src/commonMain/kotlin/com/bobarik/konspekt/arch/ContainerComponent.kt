@@ -6,7 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import org.orbitmvi.orbit.container
 import kotlin.coroutines.CoroutineContext
 
-abstract class ContainerComponent<STATE : BaseState, SIDE_EFFECT : BaseSideEffect, EVENT : BaseEvent>(
+abstract class ContainerComponent<STATE : Any, SIDE_EFFECT : Any, EVENT>(
     initState: STATE,
     componentContext: ComponentContext,
     coroutineContext: CoroutineContext = Dispatchers.Main.immediate
