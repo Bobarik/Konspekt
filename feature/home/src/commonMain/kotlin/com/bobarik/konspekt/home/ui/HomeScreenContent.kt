@@ -27,20 +27,25 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import app.cash.quiver.Absent
+import app.cash.quiver.Failure
+import app.cash.quiver.Present
 import com.bobarik.konspekt.home.component.HomeEvent
 import com.bobarik.konspekt.home.component.HomeState
+import com.bobarik.konspekt.home.model.NoteUi
 import com.bobarik.konspekt.home.ui.composables.HomeNoteItem
 import kotlin.math.roundToInt
 
 @Composable
 internal fun HomeScreenContent(
-  state: HomeState,
+  state: State<HomeState>,
   onEvent: (HomeEvent) -> Unit,
 ) = Scaffold(
   floatingActionButton = {
@@ -49,8 +54,9 @@ internal fun HomeScreenContent(
     ) {
       Icon(imageVector = Icons.Default.Add, contentDescription = null)
     }
-  }
+  },
 ) { insetPadding ->
+  val currentState = state.value
   Column(
     modifier = Modifier
       .padding(insetPadding)
@@ -61,26 +67,16 @@ internal fun HomeScreenContent(
       modifier = Modifier
         .fillMaxWidth()
         .weight(1f),
-      targetState = state.generalState,
-      contentKey = { it::class }
+      targetState = currentState.notes,
+      contentKey = { it::class },
     ) { generalState ->
       when (generalState) {
-        is HomeState.ScreenGeneralState.Content -> HomeScreenNotesContent(
-          state.searchQuery,
-          generalState,
-          onEvent
-        )
-
-        is HomeState.ScreenGeneralState.Empty -> HomeScreenEmptyStub()
-        HomeState.ScreenGeneralState.Loading -> HomeScreenLoadingContent()
+        is Absent -> HomeScreenLoadingContent()
+        is Failure -> Unit
+        is Present -> HomeScreenNotesContent(currentState.searchQuery, generalState.value, onEvent)
       }
     }
   }
-}
-
-@Composable
-internal fun ColumnScope.HomeScreenEmptyStub() {
-  Text(text = "Create your first note!")
 }
 
 @Composable
@@ -88,7 +84,7 @@ internal fun ColumnScope.HomeScreenLoadingContent() = Box(
   modifier = Modifier
     .fillMaxWidth()
     .weight(1f),
-  contentAlignment = Alignment.Center
+  contentAlignment = Alignment.Center,
 ) {
   val infiniteTransition = rememberInfiniteTransition()
   val numberOfDots by infiniteTransition.animateFloat(
@@ -96,8 +92,8 @@ internal fun ColumnScope.HomeScreenLoadingContent() = Box(
     targetValue = 3.5f,
     animationSpec = infiniteRepeatable(
       animation = tween(3000, easing = LinearEasing),
-      repeatMode = RepeatMode.Restart
-    )
+      repeatMode = RepeatMode.Restart,
+    ),
   )
   val dots by remember { derivedStateOf { ".".repeat(numberOfDots.roundToInt()) } }
 
@@ -107,7 +103,7 @@ internal fun ColumnScope.HomeScreenLoadingContent() = Box(
 @Composable
 internal fun ColumnScope.HomeScreenNotesContent(
   query: String,
-  generalState: HomeState.ScreenGeneralState.Content,
+  notes: List<NoteUi>,
   onEvent: (HomeEvent) -> Unit,
 ) = LazyVerticalGrid(
   modifier = Modifier
@@ -116,20 +112,20 @@ internal fun ColumnScope.HomeScreenNotesContent(
   columns = GridCells.Fixed(2),
   verticalArrangement = Arrangement.spacedBy(12.dp),
   horizontalArrangement = Arrangement.spacedBy(12.dp),
-  contentPadding = PaddingValues(12.dp)
+  contentPadding = PaddingValues(12.dp),
 ) {
   item(
-    span = { GridItemSpan(this.maxCurrentLineSpan) }
+    span = { GridItemSpan(this.maxCurrentLineSpan) },
   ) {
     OutlinedTextField(
       modifier = Modifier.fillMaxWidth(),
       value = query,
-      onValueChange = { text -> onEvent(HomeEvent.OnQueryChanged(text)) }
+      onValueChange = { text -> onEvent(HomeEvent.OnQueryChanged(text)) },
     )
   }
   items(
-    items = generalState.notes,
-    key = { it.id }
+    items = notes,
+    key = { it.id },
   ) { note ->
     HomeNoteItem(note = note)
   }

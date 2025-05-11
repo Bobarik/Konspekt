@@ -1,12 +1,14 @@
-package com.bobarik.konspekt.home.component
+package com.bobarik.konspekt.home.ui
 
-import arrow.optics.copy
-import com.arkivanov.decompose.ComponentContext
-import com.bobarik.konspekt.arch.ContainerComponent
+import app.cash.quiver.present
+import com.bobarik.konspekt.arch.BaseStore
 import com.bobarik.konspekt.arch.blockingReduce
 import com.bobarik.konspekt.arch.reduce
 import com.bobarik.konspekt.domain.models.Note
 import com.bobarik.konspekt.domain.repository.NoteRepository
+import com.bobarik.konspekt.home.component.HomeEffect
+import com.bobarik.konspekt.home.component.HomeEvent
+import com.bobarik.konspekt.home.component.HomeState
 import com.bobarik.konspekt.home.model.toUi
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -18,14 +20,11 @@ import kotlinx.coroutines.flow.onEach
 import java.util.UUID
 
 @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
-class HomeComponentImpl(
-  componentContext: ComponentContext,
+class HomeStore(
   private val notesRepository: NoteRepository,
-  private val onBackClicked: () -> Unit,
-) : ContainerComponent<HomeState, Nothing, HomeEvent>(
+) : BaseStore<HomeState, HomeEffect, HomeEvent>(
   initState = HomeState(),
-  componentContext = componentContext,
-), HomeComponent {
+) {
 
   private val currentSearchQuery = MutableStateFlow("")
 
@@ -33,25 +32,12 @@ class HomeComponentImpl(
     currentSearchQuery
       .debounce(300L)
       .flatMapLatest { query ->
-        reduce {
-          state.copy {
-
-          }
+        when {
+          query.isEmpty() -> notesRepository.getAllNotes()
+          else -> notesRepository.searchNotes(query)
         }
-        if (query.isEmpty()) {
-          notesRepository.getAllNotes()
-        } else {
-          notesRepository.searchNotes(query)
-        }
-      }
-      .onEach { list ->
-        reduce {
-          state.copy(
-            generalState = HomeState.ScreenGeneralState.Content(
-              notes = list.map(Note::toUi),
-            ),
-          )
-        }
+      }.onEach { list ->
+        reduce { state.copy(notes = list.map(Note::toUi).present()) }
       }.launchIn(coroutineScope)
   }
 
@@ -62,12 +48,7 @@ class HomeComponentImpl(
 
   private fun onButtonClicked() {
     intent {
-      notesRepository.upsertNote(
-        Note(
-          title = "Hello",
-          note = UUID.randomUUID().toString(),
-        ),
-      )
+      notesRepository.upsertNote(Note(title = "Hello", note = UUID.randomUUID().toString()))
     }
   }
 
@@ -75,6 +56,4 @@ class HomeComponentImpl(
     currentSearchQuery.value = query
     state.copy(searchQuery = query)
   }
-
-  private fun onNavigateBack() = onBackClicked()
 }

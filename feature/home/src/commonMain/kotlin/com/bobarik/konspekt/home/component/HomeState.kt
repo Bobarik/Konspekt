@@ -1,24 +1,14 @@
 package com.bobarik.konspekt.home.component
 
+import androidx.compose.runtime.Immutable
+import app.cash.quiver.Absent
+import app.cash.quiver.Outcome
 import arrow.optics.optics
 import com.bobarik.konspekt.home.model.NoteUi
 
 @optics
+@Immutable
 data class HomeState(
   val searchQuery: String = "",
-  val generalState: ScreenGeneralState = ScreenGeneralState.Loading,
-) {
-
-  companion object;
-
-  sealed interface ScreenGeneralState {
-
-    data class Content(val notes: List<NoteUi>) : ScreenGeneralState {
-      companion object
-    }
-
-    data object Loading : ScreenGeneralState
-
-    data object Empty : ScreenGeneralState
-  }
-}
+  val notes: Outcome<Nothing, List<NoteUi>> = Absent,
+)

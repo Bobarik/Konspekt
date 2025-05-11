@@ -5,12 +5,11 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
-import com.arkivanov.decompose.router.stack.push
+import com.arkivanov.decompose.router.stack.pushNew
 import com.arkivanov.decompose.value.Value
 import com.bobarik.konspekt.home.component.HomeComponent
 import com.bobarik.konspekt.login.component.LoginComponent
-import com.bobarik.konspekt.root.component.RootComponent.Child.HomeChild
-import com.bobarik.konspekt.root.component.RootComponent.Child.LoginChild
+import com.bobarik.konspekt.arch.ScreenComponent
 import kotlinx.serialization.Serializable
 import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
@@ -21,7 +20,7 @@ class RootComponentImpl(
 
   private val navigation = StackNavigation<Config>()
 
-  override val childStack: Value<ChildStack<*, RootComponent.Child>> = childStack(
+  override val childStack: Value<ChildStack<*, ScreenComponent>> = childStack(
     source = navigation,
     serializer = Config.serializer(),
     initialConfiguration = Config.Login,
@@ -32,9 +31,9 @@ class RootComponentImpl(
   private fun createChild(
     config: Config,
     componentContext: ComponentContext,
-  ): RootComponent.Child = when (config) {
-    is Config.Login -> LoginChild(itemLogin(componentContext))
-    is Config.Home -> HomeChild(itemHome(componentContext))
+  ): ScreenComponent = when (config) {
+    is Config.Login -> itemLogin(componentContext)
+    is Config.Home -> itemHome(componentContext)
   }
 
   private fun itemLogin(
@@ -47,7 +46,7 @@ class RootComponentImpl(
 
   private fun onBack() = navigation.pop()
 
-  private fun onHome() = navigation.push(Config.Home)
+  private fun onHome() = navigation.pushNew(Config.Home)
 
   @Serializable
   private sealed interface Config {
@@ -58,5 +57,4 @@ class RootComponentImpl(
     @Serializable
     data object Home : Config
   }
-
 }
