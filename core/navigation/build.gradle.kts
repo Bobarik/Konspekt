@@ -8,8 +8,7 @@ plugins {
 dependencies {
   commonMainImplementation(compose.runtime)
 
-  commonMainImplementation(libs.decompose)
-  commonMainImplementation(libs.decompose.compose)
+  commonMainImplementation(libs.androidx.navigation)
 
   commonMainImplementation(project.dependencies.platform(libs.koin.bom))
   commonMainImplementation(libs.koin.core)

@@ -1,7 +1,8 @@
 package com.bobarik.konspekt.home.ui.mvi
 
+import androidx.lifecycle.viewModelScope
 import app.cash.quiver.present
-import com.bobarik.konspekt.arch.BaseStore
+import com.bobarik.konspekt.arch.BaseViewModel
 import com.bobarik.konspekt.arch.blockingReduce
 import com.bobarik.konspekt.arch.reduce
 import com.bobarik.konspekt.domain.models.Note
@@ -17,9 +18,9 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class, ExperimentalUuidApi::class)
-class HomeStore(
+class HomeViewModel(
   private val notesRepository: NoteRepository,
-) : BaseStore<HomeState, HomeEffect, HomeEvent>(
+) : BaseViewModel<HomeState, HomeEffect, HomeEvent>(
   initState = HomeState(),
 ) {
 
@@ -35,7 +36,7 @@ class HomeStore(
         }
       }.onEach { list ->
         reduce { copy(notes = list.present()) }
-      }.launchIn(coroutineScope)
+      }.launchIn(viewModelScope)
   }
 
   override fun onEvent(event: HomeEvent) = when (event) {

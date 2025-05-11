@@ -1,3 +1,3 @@
 plugins {
-  id("konspekt.feature")
+  id("konspekt.feature.api")
 }

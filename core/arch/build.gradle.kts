@@ -8,11 +8,8 @@ plugins {
 dependencies {
   commonMainImplementation(compose.runtime)
 
-  commonMainImplementation(libs.essenty.lifecycle)
-  commonMainImplementation(libs.essenty.lifecycle.coroutines)
-
-  commonMainImplementation(libs.decompose)
-  commonMainImplementation(libs.decompose.compose)
+  commonMainImplementation(libs.androidx.lifecycle.compose)
+  commonMainImplementation(libs.androidx.lifecycle.viewmodel)
 
   commonMainApi(libs.orbit.core)
   commonMainImplementation(libs.napier)

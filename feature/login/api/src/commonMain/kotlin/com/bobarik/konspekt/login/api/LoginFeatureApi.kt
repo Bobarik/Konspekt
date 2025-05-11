@@ -1,15 +1,14 @@
 package com.bobarik.konspekt.login.api
 
-import com.arkivanov.decompose.ComponentContext
-import com.bobarik.konspekt.arch.ScreenComponent
-import com.bobarik.konspekt.navigation.ScreenConfig
-import kotlin.reflect.KClass
+import androidx.navigation.NavGraphBuilder
+import com.bobarik.konspekt.navigation.Screen
 import kotlinx.serialization.Serializable
 
-abstract class LoginComponentApi(context: ComponentContext) : ScreenComponent(context)
+interface LoginFeatureApi {
+
+  context(NavGraphBuilder)
+  fun loginGraph()
+}
 
 @Serializable
-data object LoginScreenConfig : ScreenConfig<LoginComponentApi> {
-
-  override val type: KClass<LoginComponentApi> = LoginComponentApi::class
-}
+data object LoginScreen : Screen

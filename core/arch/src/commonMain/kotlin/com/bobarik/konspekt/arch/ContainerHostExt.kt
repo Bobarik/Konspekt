@@ -5,9 +5,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberUpdatedState
-import com.arkivanov.essenty.lifecycle.Lifecycle
-import com.arkivanov.essenty.lifecycle.LifecycleOwner
-import com.arkivanov.essenty.lifecycle.coroutines.repeatOnLifecycle
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.Dispatchers
 import org.orbitmvi.orbit.ContainerHost

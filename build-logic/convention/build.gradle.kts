@@ -28,6 +28,10 @@ gradlePlugin {
       id = "konspekt.feature"
       implementationClass = "plugins.FeatureConventionPlugin"
     }
+    register("featureApi") {
+      id = "konspekt.feature.api"
+      implementationClass = "plugins.FeatureApiConventionPlugin"
+    }
     register("library") {
       id = "konspekt.library"
       implementationClass = "plugins.LibraryConventionPlugin"

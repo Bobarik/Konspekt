@@ -25,7 +25,6 @@ detekt {
 }
 
 tasks.withType<Detekt>().configureEach {
-  println("detekt running... ${this.taskIdentity.taskType.name}")
   reports {
     html.required = true
     html.outputLocation = rootProject.file("build/reports/detekt/detekt.html")
