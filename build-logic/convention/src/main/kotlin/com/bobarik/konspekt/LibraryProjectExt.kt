@@ -18,10 +18,20 @@ fun Project.configureAndroidLibrary() = extensions.configure<LibraryExtension> {
 }
 
 fun Project.configureMultiplatformTargets() = extensions.configure<KotlinMultiplatformExtension> {
+  compilerOptions {
+    freeCompilerArgs.add("-Xwhen-guards")
+    freeCompilerArgs.add("-Xcontext-receivers")
+  }
+
   applyPlatformTargets(libs)
 }
 
 fun Project.configureCommonMultiplatformTargets() = extensions.configure<KotlinMultiplatformExtension> {
+  compilerOptions {
+    freeCompilerArgs.add("-Xwhen-guards")
+    freeCompilerArgs.add("-Xcontext-receivers")
+  }
+
   applyCommonPlatformTargets(libs)
 }
 

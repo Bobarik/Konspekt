@@ -23,6 +23,11 @@ fun Project.configureMultiplatformApplication() = extensions.configure<KotlinMul
   val desktopExtension = composeExtension.extensions.getByType<DesktopExtension>()
   val compose = composeExtension.dependencies
 
+  compilerOptions {
+    freeCompilerArgs.add("-Xwhen-guards")
+    freeCompilerArgs.add("-Xcontext-receivers")
+  }
+
   sourceSets.apply {
     commonMain.dependencies {
       implementation(libs.napier)
