@@ -5,6 +5,7 @@ plugins {
 dependencies {
   commonMainImplementation(projects.feature.login.api)
   commonMainImplementation(projects.feature.home.api)
+
   commonMainImplementation(compose.runtime)
   commonMainImplementation(compose.material3)
   commonMainImplementation(compose.materialIconsExtended)

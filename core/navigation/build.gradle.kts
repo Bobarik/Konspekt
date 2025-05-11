@@ -13,4 +13,6 @@ dependencies {
 
   commonMainImplementation(project.dependencies.platform(libs.koin.bom))
   commonMainImplementation(libs.koin.core)
+
+  commonMainImplementation(projects.core.arch)
 }

@@ -12,17 +12,16 @@ import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.Dispatchers
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.annotation.OrbitDsl
-import org.orbitmvi.orbit.syntax.IntentContext
 
 @OrbitDsl
 fun <STATE : Any> ContainerHost<STATE, *>.reduce(
-  transform: IntentContext<STATE>.() -> STATE,
-) = intent { reduce(transform) }
+  transform: STATE.() -> STATE,
+) = intent { reduce { state.transform() } }
 
 @OrbitDsl
 fun <STATE : Any> ContainerHost<STATE, *>.blockingReduce(
-  transform: IntentContext<STATE>.() -> STATE,
-) = blockingIntent { reduce(transform) }
+  transform: STATE.() -> STATE,
+) = blockingIntent { reduce { state.transform() } }
 
 @OrbitDsl
 fun <SIDE_EFFECT : Any> ContainerHost<*, SIDE_EFFECT>.postEffect(

@@ -4,57 +4,24 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
-import com.arkivanov.decompose.router.stack.pop
-import com.arkivanov.decompose.router.stack.pushNew
 import com.arkivanov.decompose.value.Value
-import com.bobarik.konspekt.home.component.HomeComponent
-import com.bobarik.konspekt.login.component.LoginComponent
 import com.bobarik.konspekt.arch.ScreenComponent
-import kotlinx.serialization.Serializable
+import com.bobarik.konspekt.login.api.LoginScreenConfig
+import com.bobarik.konspekt.navigation.ScreenConfig
 import org.koin.core.component.get
-import org.koin.core.parameter.parametersOf
+import org.koin.core.qualifier.TypeQualifier
 
 class RootComponentImpl(
   componentContext: ComponentContext,
 ) : RootComponent, ComponentContext by componentContext {
 
-  private val navigation = StackNavigation<Config>()
+  override val navigation = StackNavigation<ScreenConfig<out ScreenComponent>>()
 
   override val childStack: Value<ChildStack<*, ScreenComponent>> = childStack(
     source = navigation,
-    serializer = Config.serializer(),
-    initialConfiguration = Config.Login,
+    serializer = null,
+    initialConfiguration = LoginScreenConfig,
     handleBackButton = true,
-    childFactory = ::createChild,
+    childFactory = { config, ctx -> get(qualifier = TypeQualifier(config.type)) },
   )
-
-  private fun createChild(
-    config: Config,
-    componentContext: ComponentContext,
-  ): ScreenComponent = when (config) {
-    is Config.Login -> itemLogin(componentContext)
-    is Config.Home -> itemHome(componentContext)
-  }
-
-  private fun itemLogin(
-    componentContext: ComponentContext,
-  ) = get<LoginComponent> { parametersOf(componentContext, ::onHome) }
-
-  private fun itemHome(
-    componentContext: ComponentContext,
-  ) = get<HomeComponent> { parametersOf(componentContext, ::onBack) }
-
-  private fun onBack() = navigation.pop()
-
-  private fun onHome() = navigation.pushNew(Config.Home)
-
-  @Serializable
-  private sealed interface Config {
-
-    @Serializable
-    data object Login : Config
-
-    @Serializable
-    data object Home : Config
-  }
 }

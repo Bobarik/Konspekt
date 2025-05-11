@@ -7,8 +7,10 @@ dependencies {
   commonMainImplementation(projects.core.database)
   commonMainImplementation(projects.core.designSystem)
   commonMainImplementation(projects.feature.root)
-  commonMainImplementation(projects.feature.login)
-  commonMainImplementation(projects.feature.home)
+  commonMainImplementation(projects.feature.login.api)
+  commonMainImplementation(projects.feature.login.impl)
+  commonMainImplementation(projects.feature.home.api)
+  commonMainImplementation(projects.feature.home.impl)
 }
 
 buildConfig {
