@@ -20,8 +20,5 @@ abstract class BaseStore<STATE : Any, SIDE_EFFECT : Any, EVENT>(
 
   override val container = coroutineScope.container<STATE, SIDE_EFFECT>(initialState = initState)
 
-  override fun onDestroy() {
-    println("${this::class.simpleName} IS BEING DESTROYED...")
-    coroutineScope.cancel()
-  }
+  override fun onDestroy() = coroutineScope.cancel()
 }
