@@ -1,7 +1,6 @@
 package com.bobarik.konspekt.login.screen.ui
 
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.compose.composable
 import com.bobarik.konspekt.arch.collectAsState
 import com.bobarik.konspekt.arch.collectSideEffect
 import com.bobarik.konspekt.home.api.HomeScreen
@@ -9,6 +8,7 @@ import com.bobarik.konspekt.login.api.LoginScreen
 import com.bobarik.konspekt.login.screen.mvi.LoginEffect
 import com.bobarik.konspekt.login.screen.mvi.LoginViewModel
 import com.bobarik.konspekt.navigation.LocalNavController
+import com.bobarik.konspekt.navigation.composable
 import org.koin.compose.viewmodel.koinViewModel
 
 fun NavGraphBuilder.loginScreen() {

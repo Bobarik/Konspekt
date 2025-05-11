@@ -6,7 +6,7 @@ dependencies {
   commonMainImplementation(projects.core.arch)
   commonMainImplementation(projects.core.database)
   commonMainImplementation(projects.core.designSystem)
-  commonMainImplementation(projects.feature.root)
+  commonMainImplementation(projects.core.navigation)
   commonMainImplementation(projects.feature.login.api)
   commonMainImplementation(projects.feature.login.impl)
   commonMainImplementation(projects.feature.home.api)

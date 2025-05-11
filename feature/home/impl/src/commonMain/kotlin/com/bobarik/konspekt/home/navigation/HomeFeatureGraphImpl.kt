@@ -1,11 +1,11 @@
 package com.bobarik.konspekt.home.navigation
 
 import androidx.navigation.NavGraphBuilder
-import com.bobarik.konspekt.home.api.HomeFeatureApi
 import com.bobarik.konspekt.home.ui.homeScreen
+import com.bobarik.konspekt.navigation.FeatureGraph
 
-class HomeFeatureApiImpl : HomeFeatureApi {
+class HomeFeatureGraphImpl : FeatureGraph {
 
   context(NavGraphBuilder)
-  override fun homeGraph() = homeScreen()
+  override fun featureGraph() = homeScreen()
 }
