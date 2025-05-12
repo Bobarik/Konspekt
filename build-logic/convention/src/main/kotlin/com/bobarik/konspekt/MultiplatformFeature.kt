@@ -28,9 +28,9 @@ fun Project.configureMultiplatformFeature() = extensions.configure<KotlinMultipl
 
         implementation(project.dependencies.platform(libs.koin.bom))
         implementation(libs.koin.compose)
+        implementation(libs.koin.compose.viewmodel)
 
-        implementation(libs.decompose)
-        implementation(libs.decompose.compose)
+        implementation(libs.androidx.navigation)
 
         implementation(libs.orbit.core)
 

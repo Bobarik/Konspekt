@@ -38,9 +38,9 @@ fun Project.configureMultiplatformApplication() = extensions.configure<KotlinMul
 
       implementation(project.dependencies.platform(libs.koin.bom))
       implementation(libs.koin.core)
+      implementation(libs.koin.compose)
 
-      implementation(libs.decompose)
-      implementation(libs.essenty.lifecycle)
+      implementation(libs.androidx.navigation)
 
       implementation(compose.runtime)
       implementation(compose.ui)
@@ -103,6 +103,7 @@ fun Project.configureAndroidApplication() = extensions.configure<ApplicationExte
   buildTypes {
     release {
       isMinifyEnabled = true
+      isShrinkResources = true
 
       signingConfig = signingConfigs.getByName("debug")
 
@@ -113,6 +114,7 @@ fun Project.configureAndroidApplication() = extensions.configure<ApplicationExte
     }
     debug {
       isMinifyEnabled = false
+      isShrinkResources = false
 
       proguardFiles(
         getDefaultProguardFile("proguard-android-optimize.txt"),

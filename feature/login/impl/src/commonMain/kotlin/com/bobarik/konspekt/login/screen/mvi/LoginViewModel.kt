@@ -1,10 +1,10 @@
 package com.bobarik.konspekt.login.screen.mvi
 
-import com.bobarik.konspekt.arch.BaseStore
+import com.bobarik.konspekt.arch.BaseViewModel
 import com.bobarik.konspekt.arch.blockingReduce
 import com.bobarik.konspekt.arch.postEffect
 
-class LoginStore : BaseStore<LoginState, LoginEffect, LoginEvent>(
+class LoginViewModel : BaseViewModel<LoginState, LoginEffect, LoginEvent>(
   initState = LoginState(),
 ) {
 
