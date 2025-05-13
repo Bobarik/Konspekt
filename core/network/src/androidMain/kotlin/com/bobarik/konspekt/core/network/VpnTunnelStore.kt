@@ -18,12 +18,12 @@ class VpnTunnelStore(context: Context) {
   fun load(): TunnelConfig? = preferences?.getString(TunnelKey, null)?.let { Json.decodeFromString<TunnelConfig>(it) }
 
   fun setTunnelStatus(status: TunnelStatus) = preferences?.edit(commit = true) {
-    putString(TunnelStatusKey, status.name)
+    putString(TunnelStatusKey, Json.encodeToString(status))
   }
 
   fun getTunnelStatus(): TunnelStatus {
     val tunnelStatus = preferences?.getString(TunnelStatusKey, null) ?: return TunnelStatus.Disconnected
-    return TunnelStatus.valueOf(tunnelStatus)
+    return Json.decodeFromString(tunnelStatus)
   }
 
   fun setIsUdpSupported(isUdpSupported: Boolean) = preferences?.edit(commit = true) {

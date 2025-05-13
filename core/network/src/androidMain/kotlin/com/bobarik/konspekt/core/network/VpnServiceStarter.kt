@@ -12,7 +12,7 @@ class VpnServiceStarter : BroadcastReceiver() {
   @RequiresApi(Build.VERSION_CODES.O)
   override fun onReceive(context: Context, intent: Intent) {
     val tunnelStore = VpnTunnelStore(context)
-    if (TunnelStatus.Connected == tunnelStore.getTunnelStatus()) return
+    if (tunnelStore.getTunnelStatus() is TunnelStatus.Connected) return
 
     val serviceIntent = Intent(context, VpnTunnelServiceImpl::class.java)
     serviceIntent.putExtra(AutoStartExtra, true)

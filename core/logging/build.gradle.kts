@@ -3,4 +3,5 @@ plugins {
 }
 
 dependencies {
+  commonMainApi(libs.napier)
 }
